@@ -8,7 +8,7 @@ output:
     keep_md: false
     keep_tex: false
     includes:
-      in_header: "Docs/Themes/preamble-html.tex"  
+      in_header: "Docs/Themes/html.css"  
 csl: "Docs/References/Styles/apa.csl"
 bibliography: "Docs/References/references.bib"  
 ---

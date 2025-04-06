@@ -1,5 +1,5 @@
 ---
-title: "**RMarkdown Template PDF File**"
+title: "RMarkdown Template PDF File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
@@ -16,12 +16,11 @@ output:
     latex_engine: xelatex #better font and unicode support
     keep_md: false
     includes:
-      in_header: "Docs/Themes/preamble-pdf.tex"  
+      in_header: "Docs/Themes/pdf.tex"  
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 latex-auto-install: true
 ---
-\maketitle
 \newpage
 
 # Introduction
