@@ -3,7 +3,7 @@ title: "Template RMarkdown File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
-geometry: margin=1in, textwidth=6.5in  # Set margin and text width for better text fitting
+geometry: margin=1in, 
 output:
   pdf_document:
     toc: true  # Table of contents
@@ -25,12 +25,8 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \setlength{\headheight}{14.5pt}
-  - \fancyhead[L]{}  # Left header (empty)
-  - \fancyhead[C]{Template RMarkdown File}  # Center header
-  - \fancyhead[R]{}  # Right header (empty)
-  - \fancyfoot[L]{}  # Left footer (empty)
-  - \fancyfoot[C]{\thepage}  # Centered page number in the footer
-  - \fancyfoot[R]{}  # Right footer (empty)
+  - \fancyhead[LO,LE]{Template RMarkdown File}  # Center header (section title)
+  - \fancyfoot[CO,CE]{\thepage}  # Centered footer (page number)
   # Handle graphics for better PDF output
   - \usepackage{graphicx}  # For including and adjusting graphics
   - \usepackage[font=small,labelfont=bf]{caption}  # Customize figure captions
