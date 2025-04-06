@@ -39,6 +39,7 @@ p_load(# packages for data manipulation and wrangling
 # Define output + cache paths
 output_path_images <- here("Output", "Figures")
 output_path_tables <- here("Output", "Tables")
+references_path <- here("Docs", "References")
 
 # Chunk options
 knitr::opts_chunk$set(
@@ -110,7 +111,7 @@ Data exploration is a crucial step in understanding the dataset and identifying 
 
 Data visualization is an essential part of data analysis, allowing for the communication of findings in a clear and effective manner. This section includes various plots and charts to illustrate key insights from the data.
 
-```{r data-visualization-table, fig.align="center", fig.cap="Example of a scatter plot"}
+```{r data-visualization-table, fig.cap="Example of a scatter plot"}
 
 # Example of creating a summary table 
 # summary_table <- cleaned_data %>%
@@ -128,7 +129,7 @@ Data visualization is an essential part of data analysis, allowing for the commu
 ```
 
 
-```{r data-visualization-plot, fig.align="center", fig.cap="Example of a scatter plot"}
+```{r data-visualization-plot, fig.cap="Example of a scatter plot"}
 
 # Example of visualization plot
 # ggplot(cleaned_data, aes(x = var1, y = var2)) +
@@ -150,9 +151,6 @@ Citing the packages and data used in the analysis is important for reproducibili
 # Generate citations for loaded packages
 knitr::write_bib(.packages(), here("Docs", "References", "references.bib"))
 
-# Generate a session info report
-sessioninfo::session_info()
-
 # Print out citation information for packages
 cat("### BibTeX Citations\n")
 cat("To cite the packages used in this analysis, please refer to the BibTeX entries below:\n\n")
@@ -164,6 +162,15 @@ cat("\n```")
 cat("\n\n### Data Sources\n")
 cat("- Data source 1: [Name of Dataset or Study], [DOI/Link]\n")
 cat("- Data source 2: [Name of Dataset or Study], [DOI/Link]\n")
+
+# Generate a session info report
+sessioninfo <- sessioninfo::session_info()
+print(sessioninfo[1]$platform)
+print(sessioninfo[2]$packages)
+
+# Save session info to a CSV file
+write.csv(sessioninfo[1]$platform, here(references_path, "session_info.csv"))
+write.csv(sessioninfo[2]$packages, here(references_path, "session_info_packages.csv"))
 
 ```
 
