@@ -19,12 +19,12 @@
 % Header and footer setup
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead[L]{}  % Left header (empty)
-\fancyhead[C]{Rmarkdown Template File}  % Centered header
-\fancyhead[R]{}  % Right header (empty)
-\fancyfoot[L]{}  % Left footer (empty)
-\fancyfoot[C]{\thepage}  % Centered page number
-\fancyfoot[R]{}  % Right footer (empty)
+% center of header
+\fancyhead[CO,CE]{Your Document Header}
+% center of footer
+\fancyfoot[CO,CE]{And this is a fancy footer}
+% page number on the left of even pages and right of odd pages
+\fancyfoot[LE,RO]{\thepage}
 
 % Math and symbols
 \usepackage{amsmath}  % For math support
@@ -111,5 +111,3 @@
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
-%%% Change title format to be more compact
-\usepackage{titling}
