@@ -77,7 +77,7 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = FALSE,
-  out.width = "80%",
+  out.width = "100%",
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   dpi = 800)
