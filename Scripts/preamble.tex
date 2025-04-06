@@ -25,19 +25,31 @@
 \usepackage{amssymb}  % For extra math symbols
 
 \usepackage{hyperref}  % Hyperlinks and references
-\lstset{
-  basicstyle=\small\ttfamily,
-  breaklines=true
-}
 
-\usepackage{fvextra}
+
+% Adding line breaks to the Verbatim environment
+\usepackage{listings} 
+\let\verbatim\undefined 
+\let\verbatimend\undefined 
+\lstnewenvironment{verbatim}{\lstset{breaklines,basicstyle=\small\ttfamily}}{}
+
+% Adding line breaks the Highlight environment:
+\usepackage{fvextra} 
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
     breaklines=true,
     breakanywhere=true,
     commandchars=\\\{\},
     fontsize=\small
   }
-  
+
+% Adding line breaks to the hash environment
+\usepackage{seqsplit}
+\renewcommand{\texttt}[1]{{\ttfamily\seqsplit{#1}}}
+
+\usepackage{graphicx}  % For including graphics
+\usepackage{float}  % For floating figures and tables
+\usepackage{caption}  % For captions
+
 \usepackage{booktabs}
 \usepackage{longtable}
 
