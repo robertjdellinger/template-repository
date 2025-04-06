@@ -1,1 +1,181 @@
+---
+title: "Data Cleaning"
+author: "Robert J. Dellinger"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_caption: true
+    fig_width: 6
+    fig_height: 4
+    keep_tex: true
+    latex_engine: xelatex
+    output_dir: "Output/Reports"
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    fig_caption: true
+    fig_width: 6
+    fig_height: 4
+    keep_md: true
+    self_contained: false
+    output_dir: "Docs"
+---
+
+```{r setup, include=FALSE}
+
+# Set up the environment and clear the workspace
+rm(list = ls())
+
+# Install pacman as package manager to automatically install/update packages
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
+library(pacman)
+
+# Load/install essential packages
+p_load(# packages for data manipulation and wrangling
+    tidyverse, stringr, readr, readxl, dplyr, tidyr, janitor, lubridate, glue, purrr, here,
+    # packages for data visualization and reporting
+    ggplot2, gganimate, ggrepel, ggtext, scales, kable, kableExtra, cowplot, patchwork, plotly, 
+    # packages for spatial data analysis and visualization
+    sf, tigris, raster, ggmap,
+    # packages for statistical analysis
+    knitr, rmarkdown, sessioninfo, 
+    # packages for reproducibility and version control
+    devtools, remotes
+)
+
+# Define output + cache paths
+output_path_images <- here("Output", "Figures")
+output_path_tables <- here("Output", "Tables")
+
+# Chunk options
+knitr::opts_chunk$set(
+  echo = TRUE,
+  cache = TRUE,
+  fig.path = paste0(output_path_images, "/Fig-"),
+  fig.align = "center",
+  out.width = "100%",
+  dpi = 600
+)
+
+```
+
+# Introduction
+
+This document outlines the methodology for data cleaning, exploration, and visualization. It is structured to ensure transparency and reproducibility of all analyses.
+
+## Methodology
+
+Briefly describe the methods used in the project, including data sources, cleaning steps, and techniques applied to handle missing or inconsistent data.
+
+## Loading Data
+
+The first step in any data analysis is to load the data. This section outlines the process of importing the data into R, including any necessary transformations or adjustments to ensure compatibility with the analysis.
+
+```{r load-data}
+
+# Example of loading data from a CSV file
+# raw_data <- read_csv(here("Data", "Raw", "data_file.csv"))
+# raw_data <- read_excel(here("Data", "Raw", "data_file.xlsx"))
+
+```
+
+## Cleaning Data 
+
+The data cleaning process involves several steps to ensure the data is in a suitable format for analysis. This includes handling missing values, correcting data types, and removing duplicates.
+
+```{r wrangle-data}
+
+# Example of cleaning data
+# - Removing duplicates
+# - Handling missing values
+# - Converting data types and cleaning white space
+# - Renaming columns, etc.
+
+# cleaned_data <- raw_data %>%
+#   clean_names() %>%
+#   mutate(column_name = as_factor(column_name)) %>% 
+#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% # convert to date
+#   mutate(numeric_column = as.numeric(numeric_column)) %>% # convert to numeric
+#   mutate(accross(everything(), ~str_squish(.))) %>% # clean whitespace
+#   drop_na()
+
+```
+
+## Data Exploration
+
+Data exploration is a crucial step in understanding the dataset and identifying patterns or anomalies. This section includes summary statistics, visualizations, and any other relevant analyses to gain insights into the data.
+
+```{r data-exploration}
+
+# Explore the cleaned data using basic summaries:
+# glimpse(cleaned_data)
+# summary(cleaned_data)
+# str(cleaned_data)
+
+```
+
+## Data Visualization
+
+Data visualization is an essential part of data analysis, allowing for the communication of findings in a clear and effective manner. This section includes various plots and charts to illustrate key insights from the data.
+
+```{r data-visualization-table, fig.align="center", fig.cap="Example of a scatter plot"}
+
+# Example of creating a summary table 
+# summary_table <- cleaned_data %>%
+#   group_by(group_var) %>%
+#   summarise(mean_value = mean(value_var, na.rm = TRUE)) %>%
+#   ungroup() %>%
+#   kable() %>%
+#   kable_styling(full_width = F, position = "left") 
+
+# save_kable(summary_table, file = here(output_path_tables, "summary_table.html"),
+#   bootstrap_options = c("striped", "hover", "condensed"),
+#   full_width = F, position = "left")
+
+
+```
+
+
+```{r data-visualization-plot, fig.align="center", fig.cap="Example of a scatter plot"}
+
+# Example of visualization plot
+# ggplot(cleaned_data, aes(x = var1, y = var2)) +
+#   geom_point() +
+#   theme_minimal()
+
+# Example of saving a plot
+# ggsave(filename = here(output_path_images, "plot_name.png"), plot = last_plot(), width = 6, height = 4)
+
+```
+
+# Literature Cited
+
+Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages.
+
+```{r}
+
+# Site packages and data used here 
+# Generate citations for loaded packages
+knitr::write_bib(.packages(), here("Docs", "References", "references.bib"))
+
+# Generate a session info report
+sessioninfo::session_info()
+
+# Print out citation information for packages
+cat("### BibTeX Citations\n")
+cat("To cite the packages used in this analysis, please refer to the BibTeX entries below:\n\n")
+cat("\n```bibtex\n")
+cat(readLines(here("Docs", "References", "references.bib")), sep = "\n")
+cat("\n```")
+
+# Optionally cite data sources here (example):
+cat("\n\n### Data Sources\n")
+cat("- Data source 1: [Name of Dataset or Study], [DOI/Link]\n")
+cat("- Data source 2: [Name of Dataset or Study], [DOI/Link]\n")
+
+```
 
