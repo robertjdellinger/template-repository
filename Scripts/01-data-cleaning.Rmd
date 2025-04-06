@@ -12,7 +12,8 @@ output:
     fig_height: 4
     keep_tex: true
     latex_engine: xelatex
-nocite: '@*'
+bibliography: "References/references.bib" # Path to .bib file
+nocite: '@*'  # Include all references in the bibliography
 ---
 
 ```{r setup, include=FALSE}
@@ -40,7 +41,6 @@ p_load(# packages for data manipulation and wrangling
 # Define output + cache paths
 output_path_images <- here("Output", "Figures")
 output_path_tables <- here("Output", "Tables")
-references_path <- here("Docs", "References")
 
 # Chunk options
 knitr::opts_chunk$set(
@@ -150,11 +150,11 @@ Citing the packages and data used in the analysis is important for reproducibili
 
 # Site packages and data used here 
 # Generate citations for loaded packages
-knitr::write_bib(.packages(), here(references_path, "references.bib"))
+knitr::write_bib(.packages(), here("Scripts", "References", "references.bib"))
 
 # Print BibTeX formatted entries (these will be included in the final rendered document)
 cat("\n```bibtex\n")
-cat(readLines(here(references_path, "references.bib")), sep = "\n")
+cat(readLines(here("Scripts", "References", "references.bib")), sep = "\n")
 cat("\n```")
 
 # Optionally cite data sources here
@@ -167,8 +167,8 @@ sessioninfo <- sessioninfo::session_info()
 print(sessioninfo[1]$platform %>% as_tibble())
 
 # Save session info to a CSV file
-write.csv(sessioninfo[1]$platform %>% as_tibble(), here(references_path, "session_info.csv"))
-write.csv(sessioninfo[2]$package %>% as_tibble(), here(references_path, "session_info_packages.csv"))
+write.csv(sessioninfo[1]$platform %>% as_tibble(), here("Docs", "References", "session_info.csv"))
+write.csv(sessioninfo[2]$package %>% as_tibble(), here("Docs", "References", "session_info_packages.csv"))
 
 ```
-
+nocite: '@*'
