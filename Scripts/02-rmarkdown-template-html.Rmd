@@ -145,7 +145,8 @@ Data visualization is an essential part of data analysis, allowing for the commu
 #   kable() %>%
 #   kable_styling(full_width = F, position = "left") 
 
-# save_kable(summary_table, file = here(output_path_tables, "summary_table.html"),
+# save_kable(summary_table, 
+#   file = here(output_path_tables, "summary_table.html"),
 #   bootstrap_options = c("striped", "hover", "condensed"),
 #   full_width = F, position = "left")
 

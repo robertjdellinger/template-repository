@@ -1,0 +1,38 @@
+---
+title: "Report"
+author: "Author"
+date: "Date"
+fontsize: 12pt
+bibliography: references.bib
+link-citations: true
+
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+    smooth_scroll: true
+    toc_depth: 2
+    number_sections: true
+    theme: cerulean
+    fig_caption: true
+    df_print: paged
+
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    latex_engine: xelatex
+    fig_caption: true
+    pandoc_args: [
+      "-V", "header-includes:\\usepackage{titlesec}\\newcommand{\\sectionbreak}{\\clearpage}"
+    ]
+
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Calibri}
+
+editor_options:
+  markdown:
+    wrap: 72
+---
