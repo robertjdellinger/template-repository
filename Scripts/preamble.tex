@@ -19,12 +19,16 @@
 % Header and footer setup
 \usepackage{fancyhdr}
 \pagestyle{fancy}
+% Left/Right header (empty)
+\fancyhead[L,R]{}  
+% Left/Right header (empty)
+\fancyfoot[L,R]{}  
 % center of header
 \fancyhead[CO,CE]{Your Document Header}
 % center of footer
-\fancyfoot[CO,CE]{And this is a fancy footer}
-% page number on the left of even pages and right of odd pages
-\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[CO,CE]{\thepage}
+
+
 
 % Math and symbols
 \usepackage{amsmath}  % For math support
@@ -81,7 +85,6 @@
 \usepackage{ragged2e} % justifying text
 \usepackage{setspace} % spacing commands, automatically makes captions single-spaced
   \setstretch{1.5} \frenchspacing
-\usepackage{lastpage} % access number of last page for numbering in margin
 
 %% fonts setup
 \usepackage{libertine}
@@ -103,7 +106,6 @@
 
 % Tables and long tables
 \usepackage{longtable,booktabs}
-% \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 

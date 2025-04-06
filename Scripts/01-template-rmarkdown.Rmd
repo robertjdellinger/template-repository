@@ -208,6 +208,8 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 
 ```
 
+\newpage
+
 # Literature Cited
 
 Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base, @R-ggplot2, @R-tidyverse, @R-here. To put citations in parentheses, use `[@key]` instead. 
