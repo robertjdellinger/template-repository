@@ -2,6 +2,7 @@
 title: "**RMarkdown Template HTML File**"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
+fontsize: 12pt  
 output:
   tufte::tufte_html:
     fig_caption: true
@@ -199,6 +200,7 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 ```
 
 
+\newpage
 
 # Literature Cited
 
