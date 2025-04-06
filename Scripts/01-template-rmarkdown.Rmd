@@ -11,7 +11,7 @@ output:
     fig_caption: true  # Enable figure captions
     fig_width: 6  # Set figure width
     fig_height: 4  # Set figure height
-    keep_tex: false  
+    keep_tex: true
     latex_engine: xelatex #better font and unicode support
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
