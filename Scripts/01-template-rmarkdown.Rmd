@@ -113,13 +113,13 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = TRUE,
-  results = 'asis',  # Display text output as code block
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
   dpi = 800,
   tidy = 'styler')
 
+options(width = 60)
 ```
 
 ## Loading Data
