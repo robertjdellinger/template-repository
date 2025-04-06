@@ -1,5 +1,5 @@
 ---
-title: "**RMarkdown Template PDF File**"
+title: "**RMarkdown Template HTML File**"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
