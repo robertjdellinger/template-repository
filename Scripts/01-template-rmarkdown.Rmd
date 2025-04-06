@@ -18,6 +18,7 @@ output:
 bibliography: "Docs/References/references.bib"  
 # Path to CSL file for APA citation style
 csl: "Docs/References/Styles/apa.csl"  
+cache: false  # Disable caching
 header-includes:
   # Set page margins and use double-spacing 
   - \usepackage{geometry}
@@ -31,7 +32,6 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \setlength{\headheight}{15pt}
-  - \setwidth{\textwidth}{6in}
   - \fancyhead[L]{}  # Left header (empty)
   - \fancyhead[C]{Template RMarkdown File} 
   - \fancyhead[R]{}  # Right header (empty)
@@ -114,7 +114,7 @@ knitr::opts_chunk$set(
   out.width = "80%",
   dpi = 600,
   results = "asis",
-  tidy.opts = list(width.cutoff = 70), 
+  tidy.opts = list(width.cutoff = I(60)), 
   tidy = TRUE)
 
 ```
@@ -203,7 +203,7 @@ p1 <- ggplot(
   subset(diamonds, carat >= 2.2),
   aes(x = table, y = price, colour = cut)
 ) +
-  geom_point(alpha = 0.7) +  # Points with transparency
+  geom_point(alpha = 0.7) +  
   geom_smooth(method = "loess", alpha = 0.05, linewidth = 1, span = 1, formula = y ~ x) +  # Smoothing line
   scale_color_npg() +  # Apply NPG color scale
   theme_bw() +  # White background theme
