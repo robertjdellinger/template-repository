@@ -60,7 +60,7 @@ p_load(# packages for data manipulation and wrangling
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
     # packages for formatting, reproducibility and version control
-    devtools, remotes, knitcitations, tinytex
+    devtools, remotes, knitcitations, tinytex, formatR
 )
 
 # Define output + cache paths
@@ -74,8 +74,8 @@ knitr::opts_chunk$set(
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "100%",
-  dpi = 600
-)
+  dpi = 600,
+  tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 
 ```
 
