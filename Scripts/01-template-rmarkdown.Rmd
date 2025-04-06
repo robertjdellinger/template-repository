@@ -120,7 +120,7 @@ knitr::opts_chunk$set(
   out.width = "80%",
   dpi = 600,
   results = "asis",
-  tidy.opts = list(width.cutoff = I(60)), 
+  tidy.opts = list(width.cutoff = I(65)), 
   tidy = TRUE)
 
 ```
@@ -240,7 +240,8 @@ p2_npg <- p2 + scale_fill_npg()
 grid.arrange(p1_npg, p2_npg, ncol = 2)
 
 # Example of saving a plot
-# ggsave(filename = here(output_path_images, "plot_name.png"), plot = last_plot(), width = 6, height = 4)
+# ggsave(filename = here(output_path_images, "plot_name.png"), 
+# plot = last_plot(), width = 6, height = 4)
 
 ```
 
