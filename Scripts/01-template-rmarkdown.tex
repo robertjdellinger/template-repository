@@ -171,12 +171,37 @@
 \usepackage{seqsplit}
 \renewcommand{\texttt}[1]{{\ttfamily\seqsplit{#1}}}
 
+%% --------- above is almost identical with default rmarkdown
+%% document formatting
+ % colors for tables and text
+\usepackage{ragged2e} % justifying text
+\usepackage{setspace} % spacing commands, automatically makes captions single-spaced
+  \setstretch{1.2} \frenchspacing
+\usepackage{lastpage} % access number of last page for numbering in margin
+
+%% fonts setup
+\usepackage{libertine}
+\usepackage{gensymb} %degree symbol
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage{makecell}
+
+\usepackage[hang]{footmisc}
+
 % Tables and long tables
 \usepackage{longtable,booktabs}
 % \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
-\setcounter{secnumdepth}{5}
 
 %%% Use protect on footnotes to avoid problems with footnotes in titles
 \let\rmarkdownfootnote\footnote%
