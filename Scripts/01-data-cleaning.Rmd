@@ -4,7 +4,7 @@ title: "Template RMarkdown File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt
-geometry: margin=1in
+geometry: margin=1in, textwidth=6.5in 
 # Set the output format to PDF and preferences
 output: # preferred output format
   pdf_document:

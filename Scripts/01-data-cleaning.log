@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.5)  5 APR 2025 23:01
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.5)  5 APR 2025 23:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -250,6 +250,10 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen161
 \Gm@layoutvoffset=\dimen162
 \Gm@dimlist=\toks25
+
+Package geometry Warning: Over-specification in `h'-direction.
+    `width' (469.75499pt) is ignored.
+
 ) (/Users/robertjdellinger/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
 \FV@CodeLineNo=\count301
@@ -953,7 +957,7 @@ L3 programming layer <2025-01-18>
 Here is how much of TeX's memory you used:
  21117 strings out of 475848
  385826 string characters out of 5773365
- 950758 words of memory out of 5000000
+ 950804 words of memory out of 5000000
  43742 multiletter control sequences out of 15000+600000
  565364 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
