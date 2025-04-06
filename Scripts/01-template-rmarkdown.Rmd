@@ -45,8 +45,14 @@ header-includes:
 
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
-  - \usepackage{fvextra}  # For better control over list formatting
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, breakanywhere, breaksymbol=, breakanywheresymbolpre=, commandchars=\\\{\}}
+  - \usepackage{fvextra}
+  - \usepackage{listings}
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+      breaklines=true,
+      breakanywhere=true,
+      commandchars=\\\{\},
+      fontsize=\small
+    }
 ---
 \newpage
 
