@@ -6,6 +6,7 @@
 This repository provides a structured template for reproducible research projects. It includes directories for data, scripts, functions, tables, and documentation to maintain a well-organized workflow.  
 
 ## Structure  
+
 ```
 template-repository/
 ├── Scripts/
@@ -27,12 +28,25 @@ template-repository/
 ├── .gitignore
 ├── README.md
 └── template-repository.Rproj
+```
 
+- **Scripts/**: Contains R scripts for data analysis and visualization.
+- **Docs/**: Contains documentation files, including LaTeX templates and references.
+- **Output/**: Contains output files, figures, and tables generated from the analysis.
+- **html.css**: CSS file for HTML output.
+- **pdf.tex**: LaTeX template for PDF output.
+- **references.bib**: BibTeX file for managing references.
+- **apa.csl**: Citation Style Language file for APA formatting.
+- **helper_functions.R**: Lcoation for functions for data analysis.
+ **README.md**: This file, providing an overview of the repository.
+ 
 ## How to use  
-1. Place raw data files in `Data/Raw/`.  
-2. Write analysis scripts in `Scripts/` using `.Rmd` files.  
-3. Save output files, figures, and tables in `Output/`.  
-4. Document methods and findings in `Docs/Methodology.Rmd`.  
+1. Clone the repository to your local machine.
+2. Add your raw data files to the `Data/Raw/` directory.
+3. Write your analysis scripts in the `Scripts/` directory.
+4. Save your output files, figures, and tables in the `Output/` directory.
+5. Use the `Docs/Themes/` directory to customize the appearance of your reports.
+6. Use the `Docs/References/` directory to manage your references and citations.
 
 ## Installation  
 Clone the repository:  
