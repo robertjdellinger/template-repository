@@ -117,7 +117,8 @@ knitr::opts_chunk$set(
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
-  dpi = 800)
+  dpi = 800,
+  tidy = 'styler')
 
 ```
 
