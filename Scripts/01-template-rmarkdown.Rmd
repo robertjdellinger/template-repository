@@ -40,9 +40,12 @@ header-includes:
   - \usepackage{enumitem}  # For better control over list formatting
   - \usepackage{microtype}  # For better typography 
   - \usepackage{fvextra}  # For including graphics
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+  - \setsansfont{Arial}
+  - \setmonofont{Source Code Pro}
 editor_options: 
   chunk_output_type: console
-monofont: Source Code Pro
 ---
 \newpage
 

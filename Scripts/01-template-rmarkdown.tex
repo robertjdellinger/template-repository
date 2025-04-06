@@ -19,7 +19,6 @@
 \usepackage{lmodern}
 \ifPDFTeX\else
   % xetex/luatex font selection
-    \setmonofont[]{Source Code Pro}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -152,6 +151,10 @@
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{fvextra}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Source Code Pro}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
