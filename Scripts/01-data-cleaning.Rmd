@@ -23,12 +23,9 @@ csl: "references/apa.csl"
 cache: false  
 # nocite: '@*'  # Include all references
 header-includes:
-  # Set page margins and spacing 
-  - \usepackage{setspace}
-  - \doublespacing
+  - \usepackage{setspace}\doublespacing
   # Enable fancy headers and footers
-  - \usepackage{fancyhdr}
-  - \pagestyle{fancy}
+  - \usepackage{fancyhdr}\pagestyle{fancy}
   # Centered page header 
   - \fancyhead[L]{}  
   - \fancyhead[C]{Template RMarkdown File} 
