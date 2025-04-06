@@ -139,7 +139,7 @@
 \usepackage{xcolor}  % For color customization
 \lstdefinestyle{RStyle}{
   language=R,                         % Set the language to R
-  basicstyle=\tiny\ttfamily,          % Use small size and monospaced font
+  basicstyle=\small\ttfamily,          % Use small size and monospaced font
   backgroundcolor=\color{white},      % Set background color
   showspaces=false,                   % Do not display spaces with underscores
   showstringspaces=false,             % Do not underline spaces in strings
@@ -160,7 +160,7 @@
     breaklines=true,
     breakanywhere=true,
     commandchars=\\\{\},
-    fontsize=\tiny
+    fontsize=\small
 }
 
 % Adding line breaks to hash environment
@@ -278,10 +278,14 @@ package is used to create file paths that are relative to the project
 directory, ensuring that the code is portable and reproducible.
 
 \begin{lstlisting}[language=R]
-# Example of loading data from a CSV file
-# raw_data <- read_csv(here("Data", "Raw", "data_file.csv"))
-# raw_data <- read_excel(here("Data", "Raw", "data_file.xlsx"))
-# raw_data <- read_sf(here("Data", "Raw", "data_file.shp"))
+# Example of loading data from a CSV
+# file raw_data <-
+# read_csv(here('Data', 'Raw',
+# 'data_file.csv')) raw_data <-
+# read_excel(here('Data', 'Raw',
+# 'data_file.xlsx')) raw_data <-
+# read_sf(here('Data', 'Raw',
+# 'data_file.shp'))
 \end{lstlisting}
 
 \subsection{Cleaning Data}\label{cleaning-data}
@@ -291,14 +295,17 @@ in a suitable format for analysis. This includes handling missing
 values, correcting data types, and removing duplicates.
 
 \begin{lstlisting}[language=R]
-# cleaning the data using dplyr and tidyr
-# cleaned_data <- raw_data %>%
-#   clean_names() %>%
-#   mutate(column_name = as_factor(column_name)) %>% 
-#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% 
-#   mutate(numeric_column = as.numeric(numeric_column)) %>% 
-#   mutate(accross(everything(), ~str_squish(.))) %>% =
-#   drop_na()
+# cleaning the data using dplyr and
+# tidyr cleaned_data <- raw_data %>%
+# clean_names() %>% mutate(column_name
+# = as_factor(column_name)) %>%
+# mutate(date_column =
+# as.Date(date_column, format =
+# '%Y-%m-%d')) %>%
+# mutate(numeric_column =
+# as.numeric(numeric_column)) %>%
+# mutate(accross(everything(),
+# ~str_squish(.))) %>% = drop_na()
 \end{lstlisting}
 
 \subsection{Data Exploration}\label{data-exploration}
@@ -309,8 +316,8 @@ statistics, visualizations, and any other relevant analyses to gain
 insights into the data.
 
 \begin{lstlisting}[language=R]
-# Explore the cleaned data using basic summaries:
-# glimpse(cleaned_data)
+# Explore the cleaned data using basic
+# summaries: glimpse(cleaned_data)
 # summary(cleaned_data)
 # str(cleaned_data)
 \end{lstlisting}
@@ -323,17 +330,21 @@ section includes various plots and charts to illustrate key insights
 from the data.
 
 \begin{lstlisting}[language=R]
-# Example of creating a summary table 
+# Example of creating a summary table
 # summary_table <- cleaned_data %>%
-#   group_by(group_var) %>%
-#   summarise(mean_value = mean(value_var, na.rm = TRUE)) %>%
-#   ungroup() %>%
-#   kable() %>%
-#   kable_styling(full_width = F, position = "left") 
+# group_by(group_var) %>%
+# summarise(mean_value =
+# mean(value_var, na.rm = TRUE)) %>%
+# ungroup() %>% kable() %>%
+# kable_styling(full_width = F,
+# position = 'left')
 
-# save_kable(summary_table, file = here(output_path_tables, "summary_table.html"),
-#   bootstrap_options = c("striped", "hover", "condensed"),
-#   full_width = F, position = "left")
+# save_kable(summary_table, file =
+# here(output_path_tables,
+# 'summary_table.html'),
+# bootstrap_options = c('striped',
+# 'hover', 'condensed'), full_width =
+# F, position = 'left')
 \end{lstlisting}
 
 \begin{lstlisting}[language=R]
