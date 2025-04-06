@@ -21,8 +21,7 @@ bibliography: "Docs/References/references.bib"
 csl: "Docs/References/Styles/apa.csl"  
 latex-auto-install: true
 ---
-\maketitle{RMarkdown Template PDF File}
-\makeauthor{Robert J. Dellinger}
+\maketitle
 \newpage
 
 # Introduction
@@ -242,5 +241,4 @@ write.csv(sessioninfo[2]$package %>% as_tibble(),
           here(references_path, "session_info_packages.csv"))
 
 ```
-
 
