@@ -23,7 +23,6 @@ latex-auto-install: true
 ---
 
 \newpage
-\tracingall
 
 # Introduction
 
@@ -91,6 +90,7 @@ knitr::opts_chunk$set(
   echo = TRUE,
   cache = TRUE,
   results = 'markup',
+  out.width = "80%",
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   dpi = 800)
