@@ -1,41 +1,49 @@
 ---
-# Insert YAML header for RMarkdown document
 title: "Template RMarkdown File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
-fontsize: 12pt
-geometry: margin=1in, textwidth=6.5in 
-# Set the output format to PDF and preferences
-output: # preferred output format
+fontsize: 12pt  # Set font size to 12pt for readability
+geometry: margin=1in, textwidth=6.5in  # Set margin and text width for better text fitting
+output:
   pdf_document:
-    toc: true
-    toc_depth: 3
-    number_sections: false
-    fig_caption: true
-    fig_width: 6
-    fig_height: 4
-    keep_tex: false
-    latex_engine: xelatex
-# Path to bib file to generate a bibliography
-bibliography: "References/references.bib"
-# Path to CSL file for citation style (APA)
-csl: "references/apa.csl"  
-cache: false  
-# nocite: '@*'  # Include all references
+    toc: true  # Table of contents
+    toc_depth: 3  # Set TOC depth
+    number_sections: false  # Enable section numbering for better navigation
+    fig_caption: true  # Enable figure captions
+    fig_width: 6  # Set figure width
+    fig_height: 4  # Set figure height
+    keep_tex: false  # Don't keep intermediate .tex files
+    latex_engine: xelatex  # Use xelatex for better font handling and unicode support
+bibliography: "References/references.bib"  # Path to the bibliography file for citations
+csl: "references/apa.csl"  # Path to CSL file for APA citation style
+cache: false  # Disable caching for clean document builds
 header-includes:
-  - \usepackage{setspace}\doublespacing
-  # Enable fancy headers and footers
-  - \usepackage{fancyhdr}\pagestyle{fancy}
-  # Centered page header 
-  - \fancyhead[L]{}  
-  - \fancyhead[C]{Template RMarkdown File} 
-  - \fancyhead[R]{} 
-  # Page numbering in the footer
-  - \fancyfoot[L]{}  
-  - \fancyfoot[C]{\thepage} 
-  - \fancyfoot[R]{}  
-  - \usepackage{graphicx} 
-  - \usepackage{microtype}
+  # Set page spacing and use double-spacing for better readability
+  - \usepackage{setspace}
+  - \doublespacing
+  # Fancy headers and footers for better document structure
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhead[L]{}  # Left header (empty)
+  - \fancyhead[C]{Template RMarkdown File}  # Center header
+  - \fancyhead[R]{}  # Right header (empty)
+  - \fancyfoot[L]{}  # Left footer (empty)
+  - \fancyfoot[C]{\thepage}  # Centered page number in the footer
+  - \fancyfoot[R]{}  # Right footer (empty)
+  # Handle graphics for better PDF output
+  - \usepackage{graphicx}  # For including and adjusting graphics
+  - \usepackage[font=small,labelfont=bf]{caption}  # Customize figure captions
+  - \usepackage{microtype}  # Improves text justification and kerning
+  # Improve typography and PDF output
+  - \usepackage{fontspec}  # Use system fonts with XeLaTeX
+  - \setmainfont{Georgia}  # Set a nice, readable serif font (e.g., Georgia or Roboto)
+  - \usepackage{hyperref}  # For clickable links in the PDF
+  # Fine-tuning typography
+  - \usepackage{parskip}  # Adds space between paragraphs and avoids indentation
+  - \usepackage{amsmath}  # For better math support
+  - \usepackage{amsfonts}  # For fonts related to mathematical symbols
+  - \usepackage{amssymb}  # For additional math symbols
+  - \usepackage{enumitem}  # For better control over list formatting
 ---
 
 ```{r setup, include=FALSE}
