@@ -115,7 +115,7 @@
 \pagestyle{fancy}
 \setlength{\headheight}{15pt}
 \fancyhead[L]{}  % Left header (empty)
-\fancyhead[C]{Template RMarkdown File}  % Centered header
+\fancyhead[C]{Rmarkdown Template File}  % Centered header
 \fancyhead[R]{}  % Right header (empty)
 \fancyfoot[L]{}  % Left footer (empty)
 \fancyfoot[C]{\thepage}  % Centered page number
@@ -128,11 +128,15 @@
 % Hyperlink and references setup
 \definecolor{urbnblue}{HTML}{1696D2}    % Defines the blue color
 \usepackage{hyperref}  % Hyperlinks and references
-\hypersetup{
-  colorlinks,
-  linkcolor=urbnblue,
-  urlcolor=urbnblue,
-}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={Dellinger, Robert J.},
+            pdftitle={Rmarkdown Template File},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
 
 % Listings for code formatting (R code)
 \usepackage{listings}
@@ -178,12 +182,12 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Template RMarkdown File},
+  pdftitle={RMarkdown Template File},
   pdfauthor={Robert J. Dellinger},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Template RMarkdown File}
+\title{RMarkdown Template File}
 \author{Robert J. Dellinger}
 \date{April 06, 2025}
 
