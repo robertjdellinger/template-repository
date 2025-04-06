@@ -18,7 +18,6 @@ output:
 bibliography: "Docs/References/references.bib"  
 # Path to CSL file for APA citation style
 csl: "Docs/References/Styles/apa.csl"  
-cache: false  # Disable caching
 header-includes:
   # Set page margins and use double-spacing 
   - \usepackage{geometry}
@@ -116,7 +115,7 @@ output_path_tables <- here("Output", "Tables")
 # Chunk options
 knitr::opts_chunk$set(
   echo = TRUE,
-  cache = TRUE,
+  cache = FALSE,
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
