@@ -12,7 +12,7 @@ output:
     fig_height: 4
     keep_tex: true
     latex_engine: xelatex
-    output_dir: "Output/Reports"
+    output: "Output/Reports"
   html_document:
     toc: true
     toc_depth: 2
@@ -22,7 +22,7 @@ output:
     fig_height: 4
     keep_md: true
     self_contained: false
-    output_dir: "Docs"
+    output: "Docs"
 ---
 
 ```{r setup, include=FALSE}
