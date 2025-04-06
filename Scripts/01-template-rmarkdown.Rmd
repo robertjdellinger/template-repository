@@ -116,6 +116,8 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = FALSE,
+    echo = TRUE,  # Show the source code
+  results = 'markup',  # Display text output as code block
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
@@ -153,9 +155,9 @@ The data cleaning process involves several steps to ensure the data is in a suit
 # cleaned_data <- raw_data %>%
 #   clean_names() %>%
 #   mutate(column_name = as_factor(column_name)) %>% 
-#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% # convert to date
-#   mutate(numeric_column = as.numeric(numeric_column)) %>% # convert to numeric
-#   mutate(accross(everything(), ~str_squish(.))) %>% # clean whitespace
+#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% 
+#   mutate(numeric_column = as.numeric(numeric_column)) %>% 
+#   mutate(accross(everything(), ~str_squish(.))) %>% =
 #   drop_na()
 
 ```

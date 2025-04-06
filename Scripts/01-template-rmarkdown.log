@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.6)  6 APR 2025 02:30
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.6)  6 APR 2025 02:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -941,21 +941,20 @@ Overfull \vbox (1.96564pt too high) detected at line 235
 
 
 [2]
-LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
-(Font)              scaled to size 8.86826pt on input line 254.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 254.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 254.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 254.
-LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/it' will be
-(Font)              scaled to size 8.86826pt on input line 254.
-LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
-(Font)              scaled to size 5.32095pt on input line 254.
-
 
 [3]
+LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
+(Font)              scaled to size 8.86826pt on input line 294.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 294.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 294.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 294.
+LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/it' will be
+(Font)              scaled to size 8.86826pt on input line 294.
+LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
+(Font)              scaled to size 5.32095pt on input line 294.
 LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/b/n' will be
 (Font)              scaled to size 10.4273pt on input line 303.
 
@@ -981,12 +980,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 21171 strings out of 475765
- 394261 string characters out of 5769642
- 968377 words of memory out of 5000000
- 43827 multiletter control sequences out of 15000+600000
+ 21169 strings out of 475765
+ 394231 string characters out of 5769642
+ 967377 words of memory out of 5000000
+ 43825 multiletter control sequences out of 15000+600000
  566313 words of font info for 103 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 90i,11n,116p,1210b,568s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,11n,116p,1210b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on 01-template-rmarkdown.pdf (6 pages).
