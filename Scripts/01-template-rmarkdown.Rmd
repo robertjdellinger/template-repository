@@ -46,13 +46,7 @@ header-includes:
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
   - \usepackage{fvextra}
-  - \usepackage{listings}
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-      breaklines=true,
-      breakanywhere=true,
-      commandchars=\\\{\},
-      fontsize=\small
-    }
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
 ---
 \newpage
 

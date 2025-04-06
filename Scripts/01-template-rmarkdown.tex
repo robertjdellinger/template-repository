@@ -149,8 +149,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{fvextra}
-\usepackage{listings}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{ breaklines=true, breakanywhere=true, commandchars=\\\{\}, fontsize=\small }
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
