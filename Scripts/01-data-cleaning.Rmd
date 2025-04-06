@@ -12,6 +12,7 @@ output:
     fig_height: 4
     keep_tex: true
     latex_engine: xelatex
+nocite: '@*'
 ---
 
 ```{r setup, include=FALSE}
@@ -33,7 +34,7 @@ p_load(# packages for data manipulation and wrangling
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
     # packages for reproducibility and version control
-    devtools, remotes
+    devtools, remotes, knitcitations
 )
 
 # Define output + cache paths
@@ -143,34 +144,31 @@ Data visualization is an essential part of data analysis, allowing for the commu
 
 # Literature Cited
 
-Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages.
+Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax @key where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use [@key] instead. 
 
-```{r}
+```{r literature-cited, echo=FALSE, results='asis'}
 
 # Site packages and data used here 
 # Generate citations for loaded packages
-knitr::write_bib(.packages(), here("Docs", "References", "references.bib"))
+knitr::write_bib(.packages(), here(references_path, "references.bib"))
 
-# Print out citation information for packages
-cat("### BibTeX Citations\n")
-cat("To cite the packages used in this analysis, please refer to the BibTeX entries below:\n\n")
+# Print BibTeX formatted entries (these will be included in the final rendered document)
 cat("\n```bibtex\n")
-cat(readLines(here("Docs", "References", "references.bib")), sep = "\n")
+cat(readLines(here(references_path, "references.bib")), sep = "\n")
 cat("\n```")
 
-# Optionally cite data sources here (example):
+# Optionally cite data sources here
 cat("\n\n### Data Sources\n")
 cat("- Data source 1: [Name of Dataset or Study], [DOI/Link]\n")
 cat("- Data source 2: [Name of Dataset or Study], [DOI/Link]\n")
 
 # Generate a session info report
 sessioninfo <- sessioninfo::session_info()
-print(sessioninfo[1]$platform)
-print(sessioninfo[2]$packages)
+print(sessioninfo[1]$platform %>% as_tibble())
 
 # Save session info to a CSV file
-write.csv(sessioninfo[1]$platform, here(references_path, "session_info.csv"))
-write.csv(sessioninfo[2]$packages, here(references_path, "session_info_packages.csv"))
+write.csv(sessioninfo[1]$platform %>% as_tibble(), here(references_path, "session_info.csv"))
+write.csv(sessioninfo[2]$package %>% as_tibble(), here(references_path, "session_info_packages.csv"))
 
 ```
 
