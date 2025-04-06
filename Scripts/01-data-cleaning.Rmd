@@ -1,11 +1,11 @@
 ---
-title: "Data Cleaning"
+# Insert YAML header for RMarkdown document
+title: "Template RMarkdown File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
-geometry: margin=1in
-fontsize: 11pt
-output:
-  # Set the output format to PDF and preferences
+fontsize: 12pt
+# Set the output format to PDF and preferences
+output: # preferred output format
   pdf_document:
     toc: true
     toc_depth: 3
@@ -15,14 +15,32 @@ output:
     fig_height: 4
     keep_tex: false
     latex_engine: xelatex
-bibliography: "References/references.bib" # Path to bib file
-csl: "references/apa.csl"  # Path to APA CSL file
-cache: false  # Disable cache 
+# Path to bib file to generate a bibliography
+bibliography: "References/references.bib"
+# Path to CSL file for citation style (APA)
+csl: "references/apa.csl"  
+cache: false  
 # nocite: '@*'  # Include all references
 header-includes:
-  - \usepackage{fontspec}
-  - \setmainfont{Arial}  
-  - \setsansfont{Arial}
+  # Set page margins and spacing 
+  - \usepackage{geometry}
+  - \geometry{left=1in, right=1in, top=1in, bottom=1in}
+  - \usepackage{setspace}
+  - \doublespacing
+  # Enable fancy headers and footers
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  # Centered page header 
+  - \fancyhead[L]{}  
+  - \fancyhead[C]{Template RMarkdown File} 
+  - \fancyhead[R]{} 
+  # Page numbering in the footer
+  - \fancyfoot[L]{}  
+  - \fancyfoot[C]{\thepage} 
+  - \fancyfoot[R]{}  
+  # Reduce header rule thickness 
+  - \renewcommand{\headrulewidth}{0.2pt}
+  - \renewcommand{\footrulewidth}{0pt} 
 ---
 
 ```{r setup, include=FALSE}
@@ -60,6 +78,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   dpi = 600
 )
+
 ```
 
 # Introduction
