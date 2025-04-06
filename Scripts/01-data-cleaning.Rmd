@@ -5,19 +5,21 @@ date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
 geometry: margin=1in, 
 output:
-  pdf_document:
-    pandoc_args: --listings
+# options to set the output format
+  pdf_document: # PDF output
     toc: true  # Table of contents
     toc_depth: 3  # Set TOC depth
-    number_sections: false  # Enable section numbering for better navigation
+    number_sections: false  # section numbering
     fig_caption: true  # Enable figure captions
     fig_width: 6  # Set figure width
     fig_height: 4  # Set figure height
-    keep_tex: false  # Don't keep intermediate .tex files
-    latex_engine: xelatex  # Use xelatex for better font handling and unicode support
-bibliography: "References/references.bib"  # Path to the bibliography file for citations
-csl: "references/apa.csl"  # Path to CSL file for APA citation style
-cache: false  # Disable caching for clean document builds
+    keep_tex: false  
+    latex_engine: xelatex #better font and unicode support
+# Path to the bibliography file for citations
+bibliography: "References/references.bib"  
+# Path to CSL file for APA citation style
+csl: "references/apa.csl"  
+cache: false  # Disable caching 
 header-includes:
   # Set page spacing and use double-spacing for better readability
   - \usepackage{setspace}
@@ -26,15 +28,14 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \setlength{\headheight}{14.5pt}
-  - \fancyhead[CO,CE]{Template RMarkdown File}  # Center header (section title)
-  - \fancyfoot[CO,CE]{\thepage}  # Centered footer (page number)
+  - \fancyhead[L]{}  # Left header (empty)
+  - \fancyhead[C]{Template RMarkdown File} 
+  - \fancyhead[R]{}  # Right header (empty)
+  - \fancyfoot[L]{}  # Left footer (empty)
+  - \fancyfoot[C]{\thepage}  # Centered page number
+  - \fancyfoot[R]{}  
   # Handle graphics for better PDF output
-  - \usepackage{graphicx}  # For including and adjusting graphics
-  - \usepackage[font=small,labelfont=bf]{caption}  # Customize figure captions
-  - \usepackage{microtype}  # Improves text justification and kerning
   - \usepackage{hyperref}  # For clickable links in the PDF
-  # Fine-tuning typography
-  - \usepackage{parskip}  # Adds space between paragraphs and avoids indentation
   - \usepackage{amsmath}  # For better math support
   - \usepackage{amsfonts}  # For fonts related to mathematical symbols
   - \usepackage{amssymb}  # For additional math symbols
