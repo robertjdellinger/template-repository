@@ -18,15 +18,32 @@ output:
 bibliography: "Docs/References/references.bib"  
 # Path to CSL file for APA citation style
 csl: "Docs/References/Styles/apa.csl"  
-cache: true  # Disable caching 
-output_file: "Docs/01-template-rmarkdown.pdf"  # Output file name
 header-includes:
   # Set page margins and use double-spacing 
   - \usepackage{geometry}
-  - \geometry{left=1in, right=1in, top=1in, bottom=1in, textwidth=6in}
+  - \geometry{left=1in, right=1in, top=1in, bottom=1in, textwidth=6.5in}
   - \usepackage{setspace}
   - \doublespacing
-
+  # Set section formatting
+  - \usepackage{titlesec}
+  - \titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+  # Fancy headers and footers
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \setlength{\headheight}{15pt}
+  - \setwidth{\textwidth}{6in}
+  - \fancyhead[L]{}  # Left header (empty)
+  - \fancyhead[C]{Template RMarkdown File} 
+  - \fancyhead[R]{}  # Right header (empty)
+  - \fancyfoot[L]{}  # Left footer (empty)
+  - \fancyfoot[C]{\thepage}  # Centered page number
+  - \fancyfoot[R]{}  
+  # Handle graphics for better PDF output
+  - \usepackage{hyperref}  # For clickable links in the PDF
+  - \usepackage{amsmath}  # For better math support
+  - \usepackage{amsfonts}  # For fonts related to mathematical symbols
+  - \usepackage{amssymb}  # For additional math symbols
+  - \usepackage{enumitem}  # For better control over list formatting
 ---
 
 # Introduction
