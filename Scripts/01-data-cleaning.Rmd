@@ -3,7 +3,7 @@ title: "Template RMarkdown File"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
-geometry: margin=1in, textwidth=6.5in  # Set margin and text width for better text fitting
+#geometry: margin=1in, textwidth=6.5in  # Set margin and text width for better text fitting
 output:
   pdf_document:
     toc: true  # Table of contents
