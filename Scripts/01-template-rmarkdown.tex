@@ -147,22 +147,23 @@
 % Hyperlink and references setup
 \definecolor{urbnblue}{HTML}{1696D2}    % Defines the blue color
 \usepackage{hyperref}  % Hyperlinks and references
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={Dellinger, Robert J.},
-            pdftitle={Rmarkdown Template File},
-            colorlinks=true,
-            citecolor=blue,
-            urlcolor=blue,
-            linkcolor=magenta,
-            pdfborder={0 0 0}}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=urbnblue,
+  citecolor=urbnblue,
+  urlcolor=urbnblue,
+  pdfborder={0 0 0},
+  pdfauthor={Robert J. Dellinger},
+  pdftitle={Rmarkdown Template File}
+}
 
 % Listings for code formatting (R code)
 \usepackage{listings}
 \usepackage{xcolor}  % For color customization
 \lstdefinestyle{RStyle}{
   language=R,                         % Set the language to R
-  basicstyle=\small\ttfamily,          % Use small size and monospaced font
+  backgroundcolor=\color{gray!10},  % Set background color
+  basicstyle=\fontsize{8}{10}\selectfont\ttfamily,  % Custom font size between tiny and small
   backgroundcolor=\color{white},      % Set background color
   showspaces=false,                   % Do not display spaces with underscores
   showstringspaces=false,             % Do not underline spaces in strings
@@ -170,28 +171,16 @@
   tabsize=2,                          % Set tab size to 2 spaces
   breaklines=true,                    % Enable line breaking
   breakatwhitespace=true,            % Break lines at whitespace
+  breakautoindent=true,
   columns=fullflexible,
   escapeinside = ||,
-  breakindent=0pt,
   commentstyle=\color{urbnblue},          % Style for comments
   keywordstyle=\color{black},          % Style for keywords
   stringstyle=\color{black}           % Style for strings
 }
 \lstset{style=RStyle}
 
-% Fancy verbatim (improve code formatting)
-\usepackage{fancyvrb}
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-    breaklines=true,
-    breakanywhere=true,
-    commandchars=\\\{\},
-    fontsize=\small
-}
-
 % Adding line breaks to hash environment
-\usepackage{seqsplit}
-\renewcommand{\texttt}[1]{{\ttfamily\seqsplit{#1}}}
 \lstset{xleftmargin=15pt, xrightmargin=15pt}  % Adjust code block margins
 
 % Tables and long tables
@@ -204,6 +193,15 @@
 \def\footnote{\protect\rmarkdownfootnote}
 
 \setlength{\emergencystretch}{5em}  % Increase stretch
+
+% Graphics
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
 
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
