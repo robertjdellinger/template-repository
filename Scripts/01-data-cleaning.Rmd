@@ -146,7 +146,7 @@ Data visualization is an essential part of data analysis, allowing for the commu
 
 Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use `[@key]` instead. 
 
-```{r literature-cited, echo=FALSE, results='asis'}
+```{r literature-cited, echo=FALSE, include=FALSE}
 
 # Site packages and data used here 
 # Generate citations for loaded packages
@@ -161,4 +161,4 @@ write.csv(sessioninfo[1]$platform %>% as_tibble(), here("Docs", "References", "s
 write.csv(sessioninfo[2]$package %>% as_tibble(), here("Docs", "References", "session_info_packages.csv"))
 
 ```
-nocite: '@*'
+
