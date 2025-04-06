@@ -19,6 +19,7 @@ bibliography: "Docs/References/references.bib"
 # Path to CSL file for APA citation style
 csl: "Docs/References/Styles/apa.csl"  
 cache: false  # Disable caching 
+output_file: "Docs/01-template-rmarkdown.pdf"  # Output file name
 header-includes:
   # Set page margins and use double-spacing 
   - \usepackage{geometry}
