@@ -100,12 +100,25 @@
 \usepackage{amsmath, amssymb, gensymb, xcolor}
 
 % Page layout and formatting
-\geometry{a4paper, margin=1in, headheight=0.5in, footskip=0.5in}
-\usepackage{setspace}  % For line spacing
-\setlength{\parskip}{6pt plus 2pt minus 1pt}  % Adjust paragraph spacing
-\setstretch{1.5}  % Adjust line spacing
+\geometry{a4paper, left=1in, right=1in, top=1in, bottom=1in, headheight=0.5in, footskip=0.5in}  % Consistent margin setting
+\usepackage{setspace}  % For controlling line spacing
+\setlength{\parskip}{8pt plus 2pt minus 1pt}  % More comfortable paragraph spacing
+\setstretch{1.5}  % Adjust line spacing to 1.5 for better readability
+
+% Section title formatting
 \usepackage{titlesec}  % Title formatting
-\titleformat{\section}[block]{\Large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\section}[block]{\Large\bfseries\centering}{\thesection}{1em}{}  % Section header formatting
+\titleformat{\subsection}[runin]{\large\bfseries}{\thesubsection}{1em}{}  % Subsection formatting with inline style
+\titleformat{\subsubsection}[runin]{\normalsize\bfseries}{\thesubsubsection}{1em}{}  % Subsubsection inline formatting
+
+% Additional improvements for section and subsection spacing
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{8pt plus 2pt minus 2pt}  % Adjust space before and after sections
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 1pt}{6pt plus 1pt minus 1pt}  % Adjust space before and after subsections
+\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{4pt plus 1pt minus 1pt}  % Adjust space before and after subsubsections
+
+% Additional document settings for clarity
+\setlength{\parindent}{0pt}  % Remove paragraph indentation (for better readability with increased line spacing)
+\setlength{\emergencystretch}{3em}  % Prevent overfull lines by stretching a bit
 
 % Header and footer setup
 \usepackage{fancyhdr}
@@ -119,7 +132,6 @@
 % center of footer
 \fancyfoot[C]{\thepage}
 
-
 \definecolor{urbnblue}{HTML}{1696D2}    % Defines the blue color
 
 
@@ -129,21 +141,20 @@
 \lstdefinestyle{RStyle}{
   language=R,                         % Set the language to R
   backgroundcolor=\color{gray!10},  % Set background color
-  basicstyle=\fontsize{8}{10}\selectfont\ttfamily,  % Custom font size between tiny and small
+  basicstyle=\fontsize{10}{11}\selectfont\ttfamily,  % Custom font size between tiny and small
   backgroundcolor=\color{white},      % Set background color
   showspaces=false,                   % Do not display spaces with underscores
   showstringspaces=false,             % Do not underline spaces in strings
   showtabs=false,                     % Do not display tabs with arrows
   tabsize=2,                          % Set tab size to 2 spaces
   breaklines=true,                    % Enable line breaking
-  breakautoindent=true,
-  columns=fullflexible,
-  escapeinside = ||,
+  breakautoindent=true,             % Enable auto-indentation after line breaks
+  columns=fullflexible,             % Use full flexible column width
+  xleftmargin=15pt, xrightmargin=15pt,  % Adjust code block margins
   commentstyle=\color{urbnblue},          % Style for comments
   keywordstyle=\color{black},          % Style for keywords
-  stringstyle=\color{black}           % Style for strings
+  stringstyle=\color{gray}           % Style for strings
 }
-
 \lstset{style=RStyle}
 
 % Fancy verbatim (improve code formatting)
@@ -155,9 +166,6 @@
     commandchars=\\\{\},
     fontsize=\small
 }
-
-% Adding line breaks to hash environment
-\lstset{xleftmargin=15pt, xrightmargin=15pt}  % Adjust code block margins
 
 % Hyperlink and references setup
 \usepackage{hyperref}  % Hyperlinks and references
@@ -171,16 +179,8 @@
 
 % Tables and long tables
 \usepackage{longtable,booktabs}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-\setlength{\emergencystretch}{5em}  % Increase stretch
-
-% Graphics
+% Graphics and figures
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -188,7 +188,7 @@
 \makeatother
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
-
+% The rest of the document content will go here. 
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi

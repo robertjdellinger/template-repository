@@ -4,7 +4,7 @@
 \contentsline {subsubsection}{Math Equations with LaTeX}{2}{subsubsection*.3}%
 \contentsline {subsection}{Setup Packages}{2}{subsection*.4}%
 \contentsline {subsection}{Loading Data}{2}{subsection*.5}%
-\contentsline {subsection}{Cleaning Data}{3}{subsection*.6}%
+\contentsline {subsection}{Cleaning Data}{2}{subsection*.6}%
 \contentsline {subsection}{Data Exploration}{3}{subsection*.7}%
 \contentsline {subsection}{Data Visualization}{3}{subsection*.8}%
 \contentsline {section}{Literature Cited}{6}{section*.9}%
