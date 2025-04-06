@@ -13,7 +13,6 @@ csl: "Docs/References/Styles/apa.csl"
 bibliography: "Docs/References/references.bib"  
 ---
 
-
 # Introduction
 
 This document outlines the methodology for data cleaning, exploration, and visualization. It is structured to ensure transparency and reproducibility of all analyses.
