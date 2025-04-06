@@ -34,9 +34,6 @@ header-includes:
   - \usepackage{graphicx}  # For including and adjusting graphics
   - \usepackage[font=small,labelfont=bf]{caption}  # Customize figure captions
   - \usepackage{microtype}  # Improves text justification and kerning
-  # Improve typography and PDF output
-  - \usepackage{fontspec}  # Use system fonts with XeLaTeX
-  - \setmainfont{Georgia}  # Set a nice, readable serif font (e.g., Georgia or Roboto)
   - \usepackage{hyperref}  # For clickable links in the PDF
   # Fine-tuning typography
   - \usepackage{parskip}  # Adds space between paragraphs and avoids indentation
