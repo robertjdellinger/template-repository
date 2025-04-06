@@ -169,7 +169,6 @@
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
     breaklines=true,
     breakanywhere=true,
-    linewidth=40ex,
     commandchars=\\\{\},
     fontsize=\small
 }
@@ -235,6 +234,7 @@
 \tableofcontents
 }
 \newpage
+\tracingall
 
 \section{Introduction}\label{introduction}
 
@@ -255,20 +255,20 @@ Here is an inline equation: \(E = mc^2\).
 
 And here is a displayed equation:
 
-\[
+\begin{equation}
 f(x) = \int_{-\infty}^{\infty} e^{-x^2} \, dx
-\]
+\end{equation}
 
 Both inline and block math can be rendered seamlessly with LaTeX.
 
 You can also create multiline equations with alignment:
 
-\[
+\begin{equation}
 \begin{aligned}
 a &= b + c \\
 d &= e + f
 \end{aligned}
-\]
+\end{equation}
 
 \newpage
 

@@ -22,7 +22,7 @@ csl: "Docs/References/Styles/apa.csl"
 latex-auto-install: true
 ---
 \newpage
-
+\tracingall
 
 # Introduction
 
@@ -38,20 +38,21 @@ Here is an inline equation: \( E = mc^2 \).
 
 And here is a displayed equation:
 
-\[
+
+\begin{equation}
 f(x) = \int_{-\infty}^{\infty} e^{-x^2} \, dx
-\]
+\end{equation}
 
 Both inline and block math can be rendered seamlessly with LaTeX.
 
 You can also create multiline equations with alignment:
 
-\[
+\begin{equation}
 \begin{aligned}
 a &= b + c \\
 d &= e + f
 \end{aligned}
-\]
+\end{equation}
 
 \newpage
 
@@ -209,7 +210,6 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 # plot = last_plot(), width = 6, height = 4)
 
 ```
-
 
 
 \newpage
