@@ -146,11 +146,16 @@ Data visualization is an essential part of data analysis, allowing for the commu
 
 Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use `[@key]` instead. 
 
+Packages cited are @R-ggplot2, @R-tidyverse, @R-dplyr, @R-tidyr, @R-janitor, @R-lubridate, @R-glue, @R-purrr, @R-here, @R-gganimate, @R-ggrepel, @R-ggtext, @R-scales, @R-kableExtra, @R-cowplot, @R-patchwork, @R-plotly, @R-sf, @R-tigris, @R-raster, and @R-knitr.
+
 ```{r literature-cited, echo=FALSE, include=FALSE}
 
 # Site packages and data used here 
 # Generate citations for loaded packages
 knitr::write_bib(.packages(), here("Scripts", "References", "references.bib"))
+bib_file <- here("Scripts", "References", "references.bib")
+# Read the bib file
+bib <- readLines(bib_file)
 
 # Generate a session info report
 sessioninfo <- sessioninfo::session_info()
@@ -162,4 +167,4 @@ write.csv(sessioninfo[2]$package %>% as_tibble(), here("Docs", "References", "se
 
 ```
 
-@ggplot2
+
