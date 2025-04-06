@@ -79,7 +79,7 @@ p_load(# packages for data manipulation and wrangling
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
     # packages for formatting, reproducibility and version control
-    devtools, remotes, knitcitations, tinytex, formatR
+    devtools, remotes, knitcitations, tinytex
 )
 
 # Define output + cache paths
