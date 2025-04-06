@@ -45,8 +45,18 @@ header-includes:
 
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
-  - \usepackage{fvextra}
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  - |
+    ```{=latex}
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+      breaksymbolleft={}, 
+      showspaces = false,
+      showtabs = false,
+      breaklines,
+      commandchars=\\\{\}, 
+      fontsize=\small
+    }
+    ```
 ---
 \newpage
 
@@ -103,7 +113,7 @@ p_load(# packages for data manipulation and wrangling
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
     # packages for formatting, reproducibility and version control
-    devtools, remotes, knitcitations, tinytex, styler
+    devtools, remotes, knitcitations, tinytex, formatR
 )
 
 # Define output + cache paths
@@ -118,7 +128,8 @@ knitr::opts_chunk$set(
   fig.align = "center",
   out.width = "80%",
   dpi = 800,
-  tidy="styler")
+  tidy=TRUE,
+  tidy.opts=list(width.cutoff=60))
 
 ```
 
