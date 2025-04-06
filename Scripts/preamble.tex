@@ -19,7 +19,6 @@
 % Header and footer setup
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\setlength{\headheight}{15pt}
 \fancyhead[L]{}  % Left header (empty)
 \fancyhead[C]{Rmarkdown Template File}  % Centered header
 \fancyhead[R]{}  % Right header (empty)
@@ -77,12 +76,11 @@
 \usepackage{seqsplit}
 \renewcommand{\texttt}[1]{{\ttfamily\seqsplit{#1}}}
 
-%% --------- above is almost identical with default rmarkdown
 %% document formatting
  % colors for tables and text
 \usepackage{ragged2e} % justifying text
 \usepackage{setspace} % spacing commands, automatically makes captions single-spaced
-  \setstretch{1.2} \frenchspacing
+  \setstretch{1.5} \frenchspacing
 \usepackage{lastpage} % access number of last page for numbering in margin
 
 %% fonts setup
