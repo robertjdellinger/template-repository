@@ -38,46 +38,10 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -128,6 +92,9 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\lstset{
+  breaklines=true
+}
 \usepackage{geometry}
 \geometry{left=1in, right=1in, top=1in, bottom=1in}
 \usepackage{setspace}
@@ -149,7 +116,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{ breaklines=true, breakanywhere=true, commandchars=\\\{\}, fontsize=\small }
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -219,18 +186,16 @@ document.
 \subsection{Loading Data}\label{loading-data}
 
 The following code loads the data from various sources, including CSV
-files, Excel files, and shapefiles. The \texttt{here} package is used to
-create file paths that are relative to the project directory, ensuring
-that the code is portable and reproducible.
+files, Excel files, and shapefiles. The \passthrough{\lstinline!here!}
+package is used to create file paths that are relative to the project
+directory, ensuring that the code is portable and reproducible.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Example of loading data from a CSV file}
-\CommentTok{\# raw\_data \textless{}{-} read\_csv(here("Data", "Raw", "data\_file.csv"))}
-\CommentTok{\# raw\_data \textless{}{-} read\_excel(here("Data", "Raw", "data\_file.xlsx"))}
-\CommentTok{\# raw\_data \textless{}{-} read\_sf(here("Data", "Raw", "data\_file.shp"))}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# Example of loading data from a CSV file
+# raw_data <- read_csv(here("Data", "Raw", "data_file.csv"))
+# raw_data <- read_excel(here("Data", "Raw", "data_file.xlsx"))
+# raw_data <- read_sf(here("Data", "Raw", "data_file.shp"))
+\end{lstlisting}
 
 \subsection{Cleaning Data}\label{cleaning-data}
 
@@ -238,18 +203,16 @@ The data cleaning process involves several steps to ensure the data is
 in a suitable format for analysis. This includes handling missing
 values, correcting data types, and removing duplicates.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# cleaning the data using dplyr and tidyr}
-\CommentTok{\# cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
-\CommentTok{\#   clean\_names() \%\textgreater{}\%}
-\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\% }
-\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\% }
-\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\% }
-\CommentTok{\#   mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% =}
-\CommentTok{\#   drop\_na()}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# cleaning the data using dplyr and tidyr
+# cleaned_data <- raw_data %>%
+#   clean_names() %>%
+#   mutate(column_name = as_factor(column_name)) %>% 
+#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% 
+#   mutate(numeric_column = as.numeric(numeric_column)) %>% 
+#   mutate(accross(everything(), ~str_squish(.))) %>% =
+#   drop_na()
+\end{lstlisting}
 
 \subsection{Data Exploration}\label{data-exploration}
 
@@ -258,14 +221,12 @@ identifying patterns or anomalies. This section includes summary
 statistics, visualizations, and any other relevant analyses to gain
 insights into the data.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Explore the cleaned data using basic summaries:}
-\CommentTok{\# glimpse(cleaned\_data)}
-\CommentTok{\# summary(cleaned\_data)}
-\CommentTok{\# str(cleaned\_data)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# Explore the cleaned data using basic summaries:
+# glimpse(cleaned_data)
+# summary(cleaned_data)
+# str(cleaned_data)
+\end{lstlisting}
 
 \subsection{Data Visualization}\label{data-visualization}
 
@@ -274,61 +235,57 @@ the communication of findings in a clear and effective manner. This
 section includes various plots and charts to illustrate key insights
 from the data.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Example of creating a summary table }
-\CommentTok{\# summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
-\CommentTok{\#   group\_by(group\_var) \%\textgreater{}\%}
-\CommentTok{\#   summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
-\CommentTok{\#   ungroup() \%\textgreater{}\%}
-\CommentTok{\#   kable() \%\textgreater{}\%}
-\CommentTok{\#   kable\_styling(full\_width = F, position = "left") }
+\begin{lstlisting}[language=R]
+# Example of creating a summary table 
+# summary_table <- cleaned_data %>%
+#   group_by(group_var) %>%
+#   summarise(mean_value = mean(value_var, na.rm = TRUE)) %>%
+#   ungroup() %>%
+#   kable() %>%
+#   kable_styling(full_width = F, position = "left") 
 
-\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables, "summary\_table.html"),}
-\CommentTok{\#   bootstrap\_options = c("striped", "hover", "condensed"),}
-\CommentTok{\#   full\_width = F, position = "left")}
-\end{Highlighting}
-\end{Shaded}
+# save_kable(summary_table, file = here(output_path_tables, "summary_table.html"),
+#   bootstrap_options = c("striped", "hover", "condensed"),
+#   full_width = F, position = "left")
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Example of visualization plot}
-\FunctionTok{data}\NormalTok{(}\StringTok{"diamonds"}\NormalTok{)}
+\begin{lstlisting}[language=R]
+# Example of visualization plot
+data("diamonds")
 
-\CommentTok{\# First Plot (p1) {-} Scatter plot with smoothing line}
-\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}
-  \FunctionTok{subset}\NormalTok{(diamonds, carat }\SpecialCharTok{\textgreater{}=} \FloatTok{2.2}\NormalTok{),}
-  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ table, }\AttributeTok{y =}\NormalTok{ price, }\AttributeTok{colour =}\NormalTok{ cut)}
-\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
-  \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x) }\SpecialCharTok{+}  
-  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# White background theme}
-  \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),  }\CommentTok{\# Center the title}
-    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,  }\CommentTok{\# Position the legend at the top}
-    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{)  }\CommentTok{\# Set text size}
-\NormalTok{  )}
+# First Plot (p1) - Scatter plot with smoothing line
+p1 <- ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +  
+  geom_smooth(method = "loess", alpha = 0.05,
+  linewidth = 1, span = 1, formula = y ~ x) +  
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10)  # Set text size
+  )
 
-\CommentTok{\# Second Plot (p2) {-} Histogram of depth for specific carat ranges}
-\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}
-  \FunctionTok{subset}\NormalTok{(diamonds, carat }\SpecialCharTok{\textgreater{}} \FloatTok{2.2} \SpecialCharTok{\&}\NormalTok{ depth }\SpecialCharTok{\textgreater{}} \DecValTok{55} \SpecialCharTok{\&}\NormalTok{ depth }\SpecialCharTok{\textless{}} \DecValTok{70}\NormalTok{),}
-  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{fill =}\NormalTok{ cut)}
-\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{,}
-  \AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Dodged histogram}
-  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# White background theme}
-  \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),  }\CommentTok{\# Center the title}
-    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,  }\CommentTok{\# Position the legend at the top}
-    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{)  }\CommentTok{\# Set text size}
-\NormalTok{  )}
+# Second Plot (p2) - Histogram of depth for specific carat ranges
+p2 <- ggplot(
+  subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
+  aes(x = depth, fill = cut)
+) +
+  geom_histogram(colour = "black",
+  binwidth = 1, position = "dodge") +  # Dodged histogram
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10)  # Set text size
+  )
 
-\NormalTok{p1\_npg }\OtherTok{\textless{}{-}}\NormalTok{ p1 }\SpecialCharTok{+} \FunctionTok{scale\_color\_npg}\NormalTok{()}
-\NormalTok{p2\_npg }\OtherTok{\textless{}{-}}\NormalTok{ p2 }\SpecialCharTok{+} \FunctionTok{scale\_fill\_npg}\NormalTok{()}
-\FunctionTok{grid.arrange}\NormalTok{(p1\_npg, p2\_npg, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+p1_npg <- p1 + scale_color_npg()
+p2_npg <- p2 + scale_fill_npg()
+grid.arrange(p1_npg, p2_npg, ncol = 2)
+\end{lstlisting}
 
 \begin{figure}
 
@@ -339,23 +296,22 @@ from the data.
 \caption{Example of a scatter plot}\label{fig:data-visualization-plot}
 \end{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Example of saving a plot}
-\CommentTok{\# ggsave(filename = here(output\_path\_images, "plot\_name.png"), }
-\CommentTok{\# plot = last\_plot(), width = 6, height = 4)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# Example of saving a plot
+# ggsave(filename = here(output_path_images, "plot_name.png"), 
+# plot = last_plot(), width = 6, height = 4)
+\end{lstlisting}
 
 \section{Literature Cited}\label{literature-cited}
 
 Citing the packages and data used in the analysis is important for
 reproducibility and transparency. The following code generates a
 bibliography of all loaded packages. Items can be cited directly within
-the documentation using the syntax \texttt{@key} where key is the
-citation key in the first line of the entry, e.g., R Core Team (2024),
-Wickham et al. (2024), Wickham (2023), Müller (2020). To put citations
-in parentheses, use \texttt{{[}@key{]}} instead.
+the documentation using the syntax \passthrough{\lstinline!@key!} where
+key is the citation key in the first line of the entry, e.g., R Core
+Team (2024), Wickham et al. (2024), Wickham (2023), Müller (2020). To
+put citations in parentheses, use \passthrough{\lstinline![@key]!}
+instead.
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}

@@ -5,6 +5,7 @@ date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
 output:
   pdf_document: # PDF output
+    pandoc_args: --listings
     toc: true  # Table of contents
     toc_depth: 3  # Set TOC depth
     number_sections: false  # section numbering
@@ -13,6 +14,8 @@ output:
     fig_height: 4  # Set figure height
     keep_tex: true
     latex_engine: xelatex #better font and unicode support
+    includes:
+      in_header: preamble.tex  # Corrected position of the includes key
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 header-includes:
@@ -45,8 +48,13 @@ header-includes:
 
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
-  - \usepackage{fvextra}
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+  - \usepackage{fvextra}  # For verbatim text
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+      breaklines=true,
+      breakanywhere=true,
+      commandchars=\\\{\},
+      fontsize=\small
+    }
 ---
 \newpage
 
@@ -114,6 +122,7 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = TRUE,
+  results = 'markup',
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
