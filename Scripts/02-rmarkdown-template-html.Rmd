@@ -2,7 +2,7 @@
 title: "**RMarkdown Template HTML File**"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
-fontsize: 12pt  
+fontsize: 11pt  
 output:
   tufte::tufte_html:
     fig_caption: true
@@ -78,7 +78,7 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = FALSE,
-  out.width = "100%",
+  out.width = "80%",
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   dpi = 800)
