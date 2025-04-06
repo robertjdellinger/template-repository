@@ -182,7 +182,8 @@ p1 <- ggplot(
   theme(
     plot.title = element_text(hjust = 0.5),  # Center the title
     legend.position = "top",  # Position the legend at the top
-    text = element_text(size = 10)  # Set text size
+    text = element_text(size = 10),  # Set text size
+    legend.key.size = unit(0.5, "cm")  # Legend key size
   )
 
 # Second Plot (p2) - Histogram of depth for specific carat ranges
@@ -196,7 +197,8 @@ p2 <- ggplot(
   theme(
     plot.title = element_text(hjust = 0.5),  # Center the title
     legend.position = "top",  # Position the legend at the top
-    text = element_text(size = 10)  # Set text size
+    text = element_text(size = 10),  # Set text size
+    legend.key.size = unit(0.5, "cm")  # Legend key size
   )
 
 p1_npg <- p1 + scale_color_npg()
