@@ -15,7 +15,7 @@ output:
     keep_tex: true
     latex_engine: xelatex #better font and unicode support
     includes:
-      in_header: preamble.tex  # Corrected position of the includes key
+      in_header: preamble.tex  
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 ---
@@ -88,7 +88,7 @@ knitr::opts_chunk$set(
   results = 'markup',
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
-  out.width = "80%",
+  out.width = "60%",
   dpi = 800)
 
 ```
