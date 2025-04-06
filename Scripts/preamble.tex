@@ -31,7 +31,28 @@
 \usepackage{listings} 
 \let\verbatim\undefined 
 \let\verbatimend\undefined 
-\lstnewenvironment{verbatim}{\lstset{breaklines, language=R, basicstyle=\tiny\ttfamily}}{}
+\lstdefinestyle{RStyle}{
+  language=R,                         % Set the language to R
+  basicstyle=\small\ttfamily,          % Use small size and monospaced font
+  numbers=left,                       % Display line numbers on the left
+  numberstyle=\tiny\color{gray},      % Style for line numbers
+  stepnumber=1,                       % Number every line
+  numbersep=5pt,                      % Distance between code and line numbers
+  backgroundcolor=\color{white},      % Set background color
+  showspaces=false,                   % Do not display spaces with underscores
+  showstringspaces=false,             % Do not underline spaces in strings
+  showtabs=false,                    % Do not display tabs with arrows
+  frame=single,                      % Add a frame around the code
+  rulecolor=\color{black},           % Frame color
+  tabsize=2,                         % Set tab size to 2 spaces
+  captionpos=b,                      % Position caption at the bottom
+  breaklines=true,                   % Enable line breaking
+  breakatwhitespace=false,           % Break lines at whitespace
+  commentstyle=\color{green},        % Style for comments
+  keywordstyle=\color{blue},         % Style for keywords
+  stringstyle=\color{red}            % Style for strings
+}
+\lstset{style=RStyle}
 
 % Adding line breaks the Highlight environment:
 \usepackage{fvextra} 
