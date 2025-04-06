@@ -1,5 +1,5 @@
 ---
-title: "RMarkdown Template File"
+title: "**RMarkdown Template File**"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
