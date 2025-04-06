@@ -2,11 +2,13 @@
 title: "Data Cleaning"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
+geometry: margin=1in
+fontsize: 11pt
 output:
   # Set the output format to PDF and preferences
   pdf_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     number_sections: false
     fig_caption: true
     fig_width: 6
@@ -17,6 +19,10 @@ bibliography: "References/references.bib" # Path to bib file
 csl: "references/apa.csl"  # Path to APA CSL file
 cache: false  # Disable cache 
 # nocite: '@*'  # Include all references
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Arial}  
+  - \setsansfont{Arial}
 ---
 
 ```{r setup, include=FALSE}
@@ -32,13 +38,13 @@ library(pacman)
 p_load(# packages for data manipulation and wrangling
     tidyverse, stringr, readr, readxl, dplyr, tidyr, janitor, lubridate, glue, purrr, here,
     # packages for data visualization and reporting
-    ggplot2, gganimate, ggrepel, ggtext, scales, kable, kableExtra, cowplot, patchwork, plotly, 
+    ggplot2, gganimate, ggrepel, ggtext, scales, kableExtra, cowplot, patchwork, plotly, 
     # packages for spatial data analysis and visualization
     sf, tigris, raster, ggmap,
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
-    # packages for reproducibility and version control
-    devtools, remotes, knitcitations
+    # packages for formatting, reproducibility and version control
+    devtools, remotes, knitcitations, tinytex
 )
 
 # Define output + cache paths
@@ -64,9 +70,31 @@ This document outlines the methodology for data cleaning, exploration, and visua
 
 Briefly describe the methods used in the project, including data sources, cleaning steps, and techniques applied to handle missing or inconsistent data.
 
+### Math Equations with LaTeX
+
+Here is an inline equation: \( E = mc^2 \).
+
+And here is a displayed equation:
+
+\[
+f(x) = \int_{-\infty}^{\infty} e^{-x^2} \, dx
+\]
+
+Both inline and block math can be rendered seamlessly with LaTeX.
+
+You can also create multiline equations with alignment:
+
+\[
+\begin{aligned}
+a &= b + c \\
+d &= e + f
+\end{aligned}
+\]
+
 ## Loading Data
 
 The first step in any data analysis is to load the data. This section outlines the process of importing the data into R, including any necessary transformations or adjustments to ensure compatibility with the analysis.
+
 
 ```{r load-data}
 
@@ -102,6 +130,7 @@ The data cleaning process involves several steps to ensure the data is in a suit
 
 Data exploration is a crucial step in understanding the dataset and identifying patterns or anomalies. This section includes summary statistics, visualizations, and any other relevant analyses to gain insights into the data.
 
+
 ```{r data-exploration}
 
 # Explore the cleaned data using basic summaries:
@@ -114,6 +143,7 @@ Data exploration is a crucial step in understanding the dataset and identifying 
 ## Data Visualization
 
 Data visualization is an essential part of data analysis, allowing for the communication of findings in a clear and effective manner. This section includes various plots and charts to illustrate key insights from the data.
+
 
 ```{r data-visualization-table, fig.cap="Example of a scatter plot"}
 
@@ -148,6 +178,7 @@ Data visualization is an essential part of data analysis, allowing for the commu
 # Literature Cited
 
 Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base, @R-ggplot2, @R-tidyverse, @R-here. To put citations in parentheses, use `[@key]` instead. 
+
 
 ```{r literature-cited, echo=FALSE, include=FALSE}
 
