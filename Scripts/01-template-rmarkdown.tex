@@ -149,14 +149,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-  breaksymbolleft={}, 
-  showspaces = false,
-  showtabs = false,
-  breaklines,
-  commandchars=\\\{\}
-}
-
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, breakanywhere, breaksymbol=, breakanywheresymbolpre=, commandchars=\\\{\}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
