@@ -40,7 +40,6 @@ header-includes:
   - \usepackage{enumitem}  # For better control over list formatting
   - \usepackage{microtype}  # For better typography 
   - \usepackage{fvextra}  # For including graphics
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines, breaknonspaceingroup, breakanywhere}
 editor_options: 
   chunk_output_type: console
 monofont: Source Code Pro
@@ -115,7 +114,8 @@ knitr::opts_chunk$set(
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
-  dpi = 800)
+  dpi = 800,
+  list(width.cutoff = 60), tidy = TRUE)
 
 ```
 
