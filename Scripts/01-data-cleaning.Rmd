@@ -152,16 +152,6 @@ Citing the packages and data used in the analysis is important for reproducibili
 # Generate citations for loaded packages
 knitr::write_bib(.packages(), here("Scripts", "References", "references.bib"))
 
-# Print BibTeX formatted entries (these will be included in the final rendered document)
-cat("\n```bibtex\n")
-cat(readLines(here("Scripts", "References", "references.bib")), sep = "\n")
-cat("\n```")
-
-# Optionally cite data sources here
-cat("\n\n### Data Sources\n")
-cat("- Data source 1: [Name of Dataset or Study], [DOI/Link]\n")
-cat("- Data source 2: [Name of Dataset or Study], [DOI/Link]\n")
-
 # Generate a session info report
 sessioninfo <- sessioninfo::session_info()
 print(sessioninfo[1]$platform %>% as_tibble())
