@@ -24,8 +24,9 @@ header-includes:
   - \usepackage{setspace}
   - \onehalfspacing
   - \usepackage{titlesec}
-  - \titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+  - \titleformat{\section}[block]{\Large\bfseries\centering}{\thesection}{1em}{}
   - \usepackage{fontspec}  # Font management with fontspec
+  - \usepackage{microtype}  # For better typography
   
   # Header and footer customization
   - \usepackage{fancyhdr}
@@ -44,8 +45,17 @@ header-includes:
 
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
-editor_options: 
-  chunk_output_type: console
+  - |
+    ```{=latex}
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+      breaksymbolleft={}, 
+      showspaces = false,
+      showtabs = false,
+      breaklines,
+      commandchars=\\\{\}
+    }
+    ```
 ---
 \newpage
 
@@ -117,9 +127,8 @@ knitr::opts_chunk$set(
   fig.align = "center",
   out.width = "80%",
   dpi = 800,
-  tidy = 'styler')
+  tidy="styler")
 
-options(width = 60)
 ```
 
 ## Loading Data

@@ -133,8 +133,9 @@
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{titlesec}
-\titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\section}[block]{\Large\bfseries\centering}{\thesection}{1em}{}
 \usepackage{fontspec}
+\usepackage{microtype}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \setlength{\headheight}{15pt}
@@ -147,6 +148,15 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  breaksymbolleft={}, 
+  showspaces = false,
+  showtabs = false,
+  breaklines,
+  commandchars=\\\{\}
+}
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
