@@ -1,5 +1,5 @@
 ---
-title: "**RMarkdown Template File**"
+title: "**RMarkdown Template PDF File**"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 fontsize: 12pt  # Set font size to 12pt for readability
@@ -12,11 +12,11 @@ output:
     fig_caption: true  # Enable figure captions
     fig_width: 6  # Set figure width
     fig_height: 4  # Set figure height
-    keep_tex: true
+    keep_tex: false
     latex_engine: xelatex #better font and unicode support
     keep_md: false
     includes:
-      in_header: "Docs/Themes/preamble.tex"  
+      in_header: "Docs/Themes/preamble-pdf.tex"  
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 latex-auto-install: true
@@ -88,7 +88,7 @@ output_path_tables <- here("Output", "Tables")
 # Chunk options
 knitr::opts_chunk$set(
   echo = TRUE,
-  cache = TRUE,
+  cache = FALSE,
   out.width = "80%",
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
