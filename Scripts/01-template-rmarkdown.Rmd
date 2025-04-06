@@ -115,7 +115,7 @@ knitr::opts_chunk$set(
   fig.align = "center",
   out.width = "80%",
   dpi = 800,
-  list(width.cutoff = 50), tidy = TRUE)
+  list(width.cutoff = 40), tidy = TRUE)
 
 ```
 
