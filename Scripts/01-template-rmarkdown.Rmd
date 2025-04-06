@@ -89,7 +89,6 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = TRUE,
-  results = 'markup',
   out.width = "80%",
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
@@ -102,7 +101,7 @@ knitr::opts_chunk$set(
 The following code loads the data from various sources, including CSV files, Excel files, and shapefiles. The `here` package is used to create file paths that are relative to the project directory, ensuring that the code is portable and reproducible.
 
 
-```{r load-data, results='asis'}
+```{r load-data}
 
 # Example of loading data from a CSV file
 # raw_data <- read_csv(here("Data", "Raw", "data_file.csv"))
@@ -115,7 +114,7 @@ The following code loads the data from various sources, including CSV files, Exc
 
 The data cleaning process involves several steps to ensure the data is in a suitable format for analysis. This includes handling missing values, correcting data types, and removing duplicates.
 
-```{r wrangle-data, results='markup'}
+```{r wrangle-data}
 
 # cleaning the data using dplyr and tidyr
 # cleaned_data <- raw_data %>%
