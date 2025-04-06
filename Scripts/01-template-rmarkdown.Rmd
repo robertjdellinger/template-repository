@@ -22,7 +22,12 @@ csl: "Docs/References/Styles/apa.csl"
 latex-auto-install: true
 ---
 \newpage
-
+<style>
+  code {
+    white-space : pre-wrap !important;
+    word-break: break-word;
+  }
+</style>
 
 # Introduction
 
