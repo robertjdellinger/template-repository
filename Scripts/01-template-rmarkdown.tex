@@ -233,10 +233,10 @@ that the code is portable and reproducible.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example of loading data from a CSV file raw\_data \textless{}{-}}
-\CommentTok{\# read\_csv(here(\textquotesingle{}Data\textquotesingle{}, \textquotesingle{}Raw\textquotesingle{}, \textquotesingle{}data\_file.csv\textquotesingle{})) raw\_data}
-\CommentTok{\# \textless{}{-} read\_excel(here(\textquotesingle{}Data\textquotesingle{}, \textquotesingle{}Raw\textquotesingle{}, \textquotesingle{}data\_file.xlsx\textquotesingle{}))}
-\CommentTok{\# raw\_data \textless{}{-} read\_sf(here(\textquotesingle{}Data\textquotesingle{}, \textquotesingle{}Raw\textquotesingle{}, \textquotesingle{}data\_file.shp\textquotesingle{}))}
+\CommentTok{\# Example of loading data from a CSV file}
+\CommentTok{\# raw\_data \textless{}{-} read\_csv(here("Data", "Raw", "data\_file.csv"))}
+\CommentTok{\# raw\_data \textless{}{-} read\_excel(here("Data", "Raw", "data\_file.xlsx"))}
+\CommentTok{\# raw\_data \textless{}{-} read\_sf(here("Data", "Raw", "data\_file.shp"))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -248,13 +248,14 @@ values, correcting data types, and removing duplicates.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# cleaning the data using dplyr and tidyr cleaned\_data \textless{}{-}}
-\CommentTok{\# raw\_data \%\textgreater{}\% clean\_names() \%\textgreater{}\% mutate(column\_name =}
-\CommentTok{\# as\_factor(column\_name)) \%\textgreater{}\% mutate(date\_column =}
-\CommentTok{\# as.Date(date\_column, format = \textquotesingle{}\%Y{-}\%m{-}\%d\textquotesingle{})) \%\textgreater{}\%}
-\CommentTok{\# mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\%}
-\CommentTok{\# mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% =}
-\CommentTok{\# drop\_na()}
+\CommentTok{\# cleaning the data using dplyr and tidyr}
+\CommentTok{\# cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
+\CommentTok{\#   clean\_names() \%\textgreater{}\%}
+\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\% }
+\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% =}
+\CommentTok{\#   drop\_na()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -268,7 +269,8 @@ insights into the data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Explore the cleaned data using basic summaries:}
-\CommentTok{\# glimpse(cleaned\_data) summary(cleaned\_data)}
+\CommentTok{\# glimpse(cleaned\_data)}
+\CommentTok{\# summary(cleaned\_data)}
 \CommentTok{\# str(cleaned\_data)}
 \end{Highlighting}
 \end{Shaded}
@@ -282,15 +284,17 @@ from the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example of creating a summary table summary\_table \textless{}{-}}
-\CommentTok{\# cleaned\_data \%\textgreater{}\% group\_by(group\_var) \%\textgreater{}\%}
-\CommentTok{\# summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
-\CommentTok{\# ungroup() \%\textgreater{}\% kable() \%\textgreater{}\% kable\_styling(full\_width = F,}
-\CommentTok{\# position = \textquotesingle{}left\textquotesingle{})}
+\CommentTok{\# Example of creating a summary table }
+\CommentTok{\# summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
+\CommentTok{\#   group\_by(group\_var) \%\textgreater{}\%}
+\CommentTok{\#   summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
+\CommentTok{\#   ungroup() \%\textgreater{}\%}
+\CommentTok{\#   kable() \%\textgreater{}\%}
+\CommentTok{\#   kable\_styling(full\_width = F, position = "left") }
 
-\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables,}
-\CommentTok{\# \textquotesingle{}summary\_table.html\textquotesingle{}), bootstrap\_options = c(\textquotesingle{}striped\textquotesingle{},}
-\CommentTok{\# \textquotesingle{}hover\textquotesingle{}, \textquotesingle{}condensed\textquotesingle{}), full\_width = F, position = \textquotesingle{}left\textquotesingle{})}
+\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables, "summary\_table.html"),}
+\CommentTok{\#   bootstrap\_options = c("striped", "hover", "condensed"),}
+\CommentTok{\#   full\_width = F, position = "left")}
 \end{Highlighting}
 \end{Shaded}
 
