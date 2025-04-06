@@ -1,52 +1,233 @@
 ---
-title: "**Scientific Hypothesis & Research Overview**"
-author: "Pa-Shun Hawkins & Robert Dellinger"
-date: "Critical Ecology Lab Summer 2024"
+title: "**RMarkdown Template PDF File**"
+author: "Robert J. Dellinger"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
   tufte::tufte_html:
     fig_caption: true
     keep_md: false
     keep_tex: false
-header-includes:
-  # Set page margins for better spacing
-  - \usepackage{geometry}
-  - \geometry{left=1in, right=1in, top=1in, bottom=1in}
-  # Adjust line spacing for readability
-  - \usepackage{setspace}
-  - \doublespacing  # Double spacing for clarity
-  # Enable fancy headers and footers
-  - \usepackage{fancyhdr}
-  - \pagestyle{fancy}
-  # Centered page header (cleaner layout)
-  - \fancyhead[L]{}  # No left header
-  - \fancyhead[C]{Scientific Hypothesis and Preliminary Data Explorations}  # Centered title
-  - \fancyhead[R]{}  # No right header
-  # Page numbering in the footer (centered)
-  - \fancyfoot[L]{}  # No left footer
-  - \fancyfoot[C]{\thepage}  # Page number at the center of the footer
-  - \fancyfoot[R]{}  # No right footer
-  # Reduce header rule thickness for a cleaner look
-  - \renewcommand{\headrulewidth}{0.2pt}
-  - \renewcommand{\footrulewidth}{0pt}  # No footer line
+    includes:
+      in_header: "Docs/Themes/preamble-html.tex"  
+csl: "Docs/References/Styles/apa.csl"
+bibliography: "Docs/References/references.bib"  
 ---
 
-------------------------------------------------------------------------
 
-```{=html, include=FALSE}
-<style>
-  /* Ensure background is white with black text */
-  body {
-    background-color: white !important;
-    color: black !important;
-    font-family: "Georgia", serif; /* Use a clean, readable font */
-    line-height: 1.6; /* Increase spacing between lines for readability */
-  }
+# Introduction
 
-  /* Improve header appearance */
-  h1, h2, h3, h4, h5, h6 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-</style>
+This document outlines the methodology for data cleaning, exploration, and visualization. It is structured to ensure transparency and reproducibility of all analyses.
+
+## Methodology
+
+Briefly describe the methods used in the project, including data sources, cleaning steps, and techniques applied to handle missing or inconsistent data.
+
+### Math Equations with LaTeX
+
+Here is an inline equation: \( E = mc^2 \).
+
+And here is a displayed equation:
+
+
+\begin{equation}
+f(x) = \int_{-\infty}^{\infty} e^{-x^2} \, dx
+\end{equation}
+
+Both inline and block math can be rendered seamlessly with LaTeX.
+
+You can also create multiline equations with alignment:
+
+\begin{equation}
+\begin{aligned}
+a &= b + c \\
+d &= e + f
+\end{aligned}
+\end{equation}
+
+
+## Setup Packages
+
+The first step in any data analysis is to load the data, options, and packages. This section installs and loads the necessary packages, sets up the output paths, and defines chunk options for the RMarkdown document. 
+
+```{r setup-packages, include=FALSE}
+
+# Set up the environment and clear the workspace
+rm(list = ls())
+
+# Install pacman as package manager to automatically install/update packages
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
+library(pacman)
+
+# Load/install essential packages
+p_load(# packages for data manipulation and wrangling
+    tidyverse, stringr, readr, readxl, dplyr, tidyr, janitor, lubridate, glue, purrr, here,
+    # packages for data visualization and reporting
+    ggplot2, gganimate, ggrepel, ggtext, ggsci, gridExtra, scales, 
+    # packages for spatial data analysis and visualization
+    sf, tigris, raster, ggmap,
+    # packages for statistical analysis
+    knitr, rmarkdown, sessioninfo, 
+    # packages for formatting, reproducibility and version control
+    devtools, remotes, knitcitations, tinytex
+)
+
+# Define output + cache paths
+output_path_images <- here("Output", "Figures")
+output_path_tables <- here("Output", "Tables")
+
+# Chunk options
+knitr::opts_chunk$set(
+  echo = TRUE,
+  cache = FALSE,
+  out.width = "80%",
+  fig.path = paste0(output_path_images, "/Fig-"),
+  fig.align = "center",
+  dpi = 800)
+
 ```
+
+## Loading Data
+
+The following code loads the data from various sources, including CSV files, Excel files, and shapefiles. The `here` package is used to create file paths that are relative to the project directory, ensuring that the code is portable and reproducible.
+
+
+```{r load-data}
+
+# Example of loading data from a CSV file
+# raw_data <- read_csv(here("Data", "Raw", "data_file.csv"))
+# raw_data <- read_excel(here("Data", "Raw", "data_file.xlsx"))
+# raw_data <- read_sf(here("Data", "Raw", "data_file.shp"))
+
+```
+
+## Cleaning Data 
+
+The data cleaning process involves several steps to ensure the data is in a suitable format for analysis. This includes handling missing values, correcting data types, and removing duplicates.
+
+```{r wrangle-data}
+
+# cleaning the data using dplyr and tidyr
+# cleaned_data <- raw_data %>%
+#   clean_names() %>%
+#   mutate(column_name = as_factor(column_name)) %>% 
+#   mutate(date_column = as.Date(date_column, format = "%Y-%m-%d")) %>% 
+#   mutate(numeric_column = as.numeric(numeric_column)) %>% 
+#   mutate(accross(everything(), ~str_squish(.))) %>% =
+#   drop_na()
+
+```
+
+## Data Exploration
+
+Data exploration is a crucial step in understanding the dataset and identifying patterns or anomalies. This section includes summary statistics, visualizations, and any other relevant analyses to gain insights into the data.
+
+
+```{r data-exploration}
+
+# Explore the cleaned data using basic summaries:
+# glimpse(cleaned_data)
+# summary(cleaned_data)
+# str(cleaned_data)
+
+```
+
+## Data Visualization
+
+Data visualization is an essential part of data analysis, allowing for the communication of findings in a clear and effective manner. This section includes various plots and charts to illustrate key insights from the data.
+
+
+```{r data-visualization-table, fig.cap="Example of a scatter plot"}
+
+# Example of creating a summary table 
+# summary_table <- cleaned_data %>%
+#   group_by(group_var) %>%
+#   summarise(mean_value = mean(value_var, na.rm = TRUE)) %>%
+#   ungroup() %>%
+#   kable() %>%
+#   kable_styling(full_width = F, position = "left") 
+
+# save_kable(summary_table, file = here(output_path_tables, "summary_table.html"),
+#   bootstrap_options = c("striped", "hover", "condensed"),
+#   full_width = F, position = "left")
+
+
+```
+
+
+```{r data-visualization-plot, fig.cap="Example of a scatter plot"}
+
+# Example of visualization plot
+data("diamonds")
+
+# First Plot (p1) - Scatter plot with smoothing line
+p1 <- ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +  
+  geom_smooth(method = "loess", alpha = 0.05,
+  linewidth = 1, span = 1, formula = y ~ x) +  
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10),  # Set text size
+    legend.key.size = unit(0.5, "cm")  # Legend key size
+  )
+
+# Second Plot (p2) - Histogram of depth for specific carat ranges
+p2 <- ggplot(
+  subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
+  aes(x = depth, fill = cut)
+) +
+  geom_histogram(colour = "black",
+  binwidth = 1, position = "dodge") +  # Dodged histogram
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10),  # Set text size
+    legend.key.size = unit(0.5, "cm")  # Legend key size
+  )
+
+p1_npg <- p1 + scale_color_npg()
+p2_npg <- p2 + scale_fill_npg()
+grid.arrange(p1_npg, p2_npg, ncol = 2)
+
+# Example of saving a plot
+# ggsave(filename = here(output_path_images, "plot_name.png"), 
+# plot = last_plot(), width = 6, height = 4)
+
+```
+
+
+
+# Literature Cited
+
+Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base, @R-ggplot2, @R-tidyverse, @R-here. To put citations in parentheses, use `[@key]` instead. 
+
+
+```{r literature-cited, echo=FALSE, include=FALSE}
+
+references_path <- here("Scripts", "Docs", "References")
+
+# Site packages and data used here 
+# Generate citations for loaded packages
+knitr::write_bib(.packages(), here(references_path, "references.bib"))
+bib_file <- here(references_path, "references.bib")
+# Read the bib file
+bib <- readLines(bib_file)
+
+# Generate a session info report
+sessioninfo <- sessioninfo::session_info()
+#print(sessioninfo[1]$platform %>% as_tibble())
+
+# Save session info to a CSV file
+write.csv(sessioninfo[1]$platform %>% as_tibble(), 
+          here(references_path, "session_info.csv"))
+write.csv(sessioninfo[2]$package %>% as_tibble(), 
+          here(references_path, "session_info_packages.csv"))
+
+```
+
+
