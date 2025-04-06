@@ -48,13 +48,6 @@ header-includes:
 
   # Hyperlink support (ensure it's loaded last)
   - \usepackage{hyperref}  # Hyperlinks and references
-  - \usepackage{fvextra}  # For verbatim text
-  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-      breaklines=true,
-      breakanywhere=true,
-      commandchars=\\\{\},
-      fontsize=\small
-    }
 ---
 \newpage
 
