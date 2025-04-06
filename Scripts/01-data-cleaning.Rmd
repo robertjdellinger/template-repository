@@ -6,6 +6,7 @@ fontsize: 12pt  # Set font size to 12pt for readability
 geometry: margin=1in, 
 output:
   pdf_document:
+    pandoc_args: --listings
     toc: true  # Table of contents
     toc_depth: 3  # Set TOC depth
     number_sections: false  # Enable section numbering for better navigation
