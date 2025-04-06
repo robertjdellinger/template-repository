@@ -41,8 +41,8 @@ header-includes:
   - \fancyfoot[C]{\thepage} 
   - \fancyfoot[R]{}  
   # Reduce header rule thickness 
-  - \renewcommand{\headrulewidth}{0.2pt}
-  - \renewcommand{\footrulewidth}{0pt} 
+  #- \renewcommand{\headrulewidth}{0.2pt}
+ # - \renewcommand{\footrulewidth}{0pt} 
 ---
 
 ```{r setup, include=FALSE}
