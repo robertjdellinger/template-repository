@@ -102,7 +102,7 @@ p_load(# packages for data manipulation and wrangling
     # packages for statistical analysis
     knitr, rmarkdown, sessioninfo, 
     # packages for formatting, reproducibility and version control
-    devtools, remotes, knitcitations, tinytex, formatR
+    devtools, remotes, knitcitations, tinytex, styler
 )
 
 # Define output + cache paths
@@ -112,8 +112,8 @@ output_path_tables <- here("Output", "Tables")
 # Chunk options
 knitr::opts_chunk$set(
   echo = TRUE,
-  cache = FALSE,
-  results = 'markup',  # Display text output as code block
+  cache = TRUE,
+  results = 'asis',  # Display text output as code block
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
@@ -255,8 +255,10 @@ sessioninfo <- sessioninfo::session_info()
 #print(sessioninfo[1]$platform %>% as_tibble())
 
 # Save session info to a CSV file
-write.csv(sessioninfo[1]$platform %>% as_tibble(), here(references_path, "session_info.csv"))
-write.csv(sessioninfo[2]$package %>% as_tibble(), here(references_path, "session_info_packages.csv"))
+write.csv(sessioninfo[1]$platform %>% as_tibble(), 
+          here(references_path, "session_info.csv"))
+write.csv(sessioninfo[2]$package %>% as_tibble(), 
+          here(references_path, "session_info_packages.csv"))
 
 ```
 

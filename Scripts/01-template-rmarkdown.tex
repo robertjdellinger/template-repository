@@ -240,9 +240,9 @@ values, correcting data types, and removing duplicates.
 \CommentTok{\# cleaning the data using dplyr and tidyr}
 \CommentTok{\# cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
 \CommentTok{\#   clean\_names() \%\textgreater{}\%}
-\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\% }
-\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\% }
-\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\%}
+\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\%}
+\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\%}
 \CommentTok{\#   mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% =}
 \CommentTok{\#   drop\_na()}
 \end{Highlighting}
@@ -273,13 +273,13 @@ from the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example of creating a summary table }
+\CommentTok{\# Example of creating a summary table}
 \CommentTok{\# summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
 \CommentTok{\#   group\_by(group\_var) \%\textgreater{}\%}
 \CommentTok{\#   summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
 \CommentTok{\#   ungroup() \%\textgreater{}\%}
 \CommentTok{\#   kable() \%\textgreater{}\%}
-\CommentTok{\#   kable\_styling(full\_width = F, position = "left") }
+\CommentTok{\#   kable\_styling(full\_width = F, position = "left")}
 
 \CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables, "summary\_table.html"),}
 \CommentTok{\#   bootstrap\_options = c("striped", "hover", "condensed"),}
@@ -297,14 +297,16 @@ from the data.
   \FunctionTok{subset}\NormalTok{(diamonds, carat }\SpecialCharTok{\textgreater{}=} \FloatTok{2.2}\NormalTok{),}
   \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ table, }\AttributeTok{y =}\NormalTok{ price, }\AttributeTok{colour =}\NormalTok{ cut)}
 \NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
-  \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x) }\SpecialCharTok{+}  
-  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# White background theme}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}
+    \AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
+    \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \CommentTok{\# White background theme}
   \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),  }\CommentTok{\# Center the title}
-    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,  }\CommentTok{\# Position the legend at the top}
-    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{)  }\CommentTok{\# Set text size}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{), }\CommentTok{\# Center the title}
+    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{, }\CommentTok{\# Position the legend at the top}
+    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{) }\CommentTok{\# Set text size}
 \NormalTok{  )}
 
 \CommentTok{\# Second Plot (p2) {-} Histogram of depth for specific carat ranges}
@@ -312,13 +314,15 @@ from the data.
   \FunctionTok{subset}\NormalTok{(diamonds, carat }\SpecialCharTok{\textgreater{}} \FloatTok{2.2} \SpecialCharTok{\&}\NormalTok{ depth }\SpecialCharTok{\textgreater{}} \DecValTok{55} \SpecialCharTok{\&}\NormalTok{ depth }\SpecialCharTok{\textless{}} \DecValTok{70}\NormalTok{),}
   \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ depth, }\AttributeTok{fill =}\NormalTok{ cut)}
 \NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{colour =} \StringTok{"black"}\NormalTok{,}
-  \AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Dodged histogram}
-  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# White background theme}
+  \FunctionTok{geom\_histogram}\NormalTok{(}
+    \AttributeTok{colour =} \StringTok{"black"}\NormalTok{,}
+    \AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}
+\NormalTok{  ) }\SpecialCharTok{+} \CommentTok{\# Dodged histogram}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \CommentTok{\# White background theme}
   \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),  }\CommentTok{\# Center the title}
-    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,  }\CommentTok{\# Position the legend at the top}
-    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{)  }\CommentTok{\# Set text size}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{), }\CommentTok{\# Center the title}
+    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{, }\CommentTok{\# Position the legend at the top}
+    \AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{10}\NormalTok{) }\CommentTok{\# Set text size}
 \NormalTok{  )}
 
 \NormalTok{p1\_npg }\OtherTok{\textless{}{-}}\NormalTok{ p1 }\SpecialCharTok{+} \FunctionTok{scale\_color\_npg}\NormalTok{()}
@@ -339,7 +343,7 @@ from the data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Example of saving a plot}
-\CommentTok{\# ggsave(filename = here(output\_path\_images, "plot\_name.png"), }
+\CommentTok{\# ggsave(filename = here(output\_path\_images, "plot\_name.png"),}
 \CommentTok{\# plot = last\_plot(), width = 6, height = 4)}
 \end{Highlighting}
 \end{Shaded}
