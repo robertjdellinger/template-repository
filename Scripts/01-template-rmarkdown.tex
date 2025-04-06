@@ -210,6 +210,8 @@
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
+\setlength{\emergencystretch}{5em}  % Increase stretch
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -269,8 +271,6 @@ a &= b + c \\
 d &= e + f
 \end{aligned}
 \end{equation}
-
-\newpage
 
 \subsection{Setup Packages}\label{setup-packages}
 
@@ -394,6 +394,7 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 # plot = last_plot(), width = 6, height = 4)
 \end{lstlisting}
 
+\clearpage
 \newpage
 
 \section{Literature Cited}\label{literature-cited}

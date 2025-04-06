@@ -54,7 +54,6 @@ d &= e + f
 \end{aligned}
 \end{equation}
 
-\newpage
 
 ## Setup Packages
 
@@ -212,6 +211,7 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 ```
 
 
+\clearpage
 \newpage
 
 # Literature Cited
