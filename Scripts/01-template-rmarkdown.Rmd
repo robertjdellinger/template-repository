@@ -47,7 +47,6 @@ header-includes:
 editor_options: 
   chunk_output_type: console
 monofont: Source Code Pro
-linestretch: 1.5
 ---
 \newpage
 
