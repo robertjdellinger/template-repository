@@ -15,9 +15,9 @@ output:
     keep_tex: false  
     latex_engine: xelatex #better font and unicode support
 # Path to the bibliography file for citations
-bibliography: "References/references.bib"  
+bibliography: "Docs/References/references.bib"  
 # Path to CSL file for APA citation style
-csl: "references/apa.csl"  
+csl: "Docs/References/Styles/apa.csl"  
 cache: false  # Disable caching 
 header-includes:
   # Set page margins and use double-spacing 
@@ -44,7 +44,7 @@ header-includes:
   - \usepackage{microtype}  # For including graphics
 ---
 
-```{r setup, include=FALSE}
+```{r setup-packages, include=FALSE}
 
 # Set up the environment and clear the workspace
 rm(list = ls())
@@ -57,7 +57,7 @@ library(pacman)
 p_load(# packages for data manipulation and wrangling
     tidyverse, stringr, readr, readxl, dplyr, tidyr, janitor, lubridate, glue, purrr, here,
     # packages for data visualization and reporting
-    ggplot2, gganimate, ggrepel, ggtext, scales, kableExtra, cowplot, patchwork, plotly, 
+    ggplot2, gganimate, ggrepel, ggtext, ggsci, gridExtra, scales, 
     # packages for spatial data analysis and visualization
     sf, tigris, raster, ggmap,
     # packages for statistical analysis
@@ -76,8 +76,9 @@ knitr::opts_chunk$set(
   cache = TRUE,
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
-  out.width = "100%",
+  out.width = "80%",
   dpi = 600,
+  results = "asis",
   tidy.opts = list(width.cutoff = 70), 
   tidy = TRUE)
 
@@ -187,9 +188,40 @@ Data visualization is an essential part of data analysis, allowing for the commu
 ```{r data-visualization-plot, fig.cap="Example of a scatter plot"}
 
 # Example of visualization plot
-# ggplot(cleaned_data, aes(x = var1, y = var2)) +
-#   geom_point() +
-#   theme_minimal()
+data("diamonds")
+
+# First Plot (p1) - Scatter plot with smoothing line
+p1 <- ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +  # Points with transparency
+  geom_smooth(method = "loess", alpha = 0.05, linewidth = 1, span = 1, formula = y ~ x) +  # Smoothing line
+  scale_color_npg() +  # Apply NPG color scale
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10)  # Set text size
+  )
+
+# Second Plot (p2) - Histogram of depth for specific carat ranges
+p2 <- ggplot(
+  subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
+  aes(x = depth, fill = cut)
+) +
+  geom_histogram(colour = "black", binwidth = 1, position = "dodge") +  # Dodged histogram
+  scale_fill_npg() +  # Apply NPG fill color scale
+  theme_bw() +  # White background theme
+  theme(
+    plot.title = element_text(hjust = 0.5),  # Center the title
+    legend.position = "top",  # Position the legend at the top
+    text = element_text(size = 10)  # Set text size
+  )
+
+p1_npg <- p1 + scale_color_npg()
+p2_npg <- p2 + scale_fill_npg()
+grid.arrange(p1_npg, p2_npg, ncol = 2)
 
 # Example of saving a plot
 # ggsave(filename = here(output_path_images, "plot_name.png"), plot = last_plot(), width = 6, height = 4)
@@ -203,10 +235,12 @@ Citing the packages and data used in the analysis is important for reproducibili
 
 ```{r literature-cited, echo=FALSE, include=FALSE}
 
+references_path <- here("Scripts", "Docs", "References")
+
 # Site packages and data used here 
 # Generate citations for loaded packages
-knitr::write_bib(.packages(), here("Scripts", "References", "references.bib"))
-bib_file <- here("Scripts", "References", "references.bib")
+knitr::write_bib(.packages(), here(references_path, "references.bib"))
+bib_file <- here(references_path, "references.bib")
 # Read the bib file
 bib <- readLines(bib_file)
 
@@ -215,8 +249,8 @@ sessioninfo <- sessioninfo::session_info()
 #print(sessioninfo[1]$platform %>% as_tibble())
 
 # Save session info to a CSV file
-write.csv(sessioninfo[1]$platform %>% as_tibble(), here("Docs", "References", "session_info.csv"))
-write.csv(sessioninfo[2]$package %>% as_tibble(), here("Docs", "References", "session_info_packages.csv"))
+write.csv(sessioninfo[1]$platform %>% as_tibble(), here(references_path, "session_info.csv"))
+write.csv(sessioninfo[2]$package %>% as_tibble(), here(references_path, "session_info_packages.csv"))
 
 ```
 
