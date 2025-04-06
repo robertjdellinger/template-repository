@@ -1,0 +1,896 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Data Cleaning},
+  pdfauthor={Robert J. Dellinger},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Data Cleaning}
+\author{Robert J. Dellinger}
+\date{April 05, 2025}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Introduction}\label{introduction}
+
+This document outlines the methodology for data cleaning, exploration,
+and visualization. It is structured to ensure transparency and
+reproducibility of all analyses.
+
+\subsection{Methodology}\label{methodology}
+
+Briefly describe the methods used in the project, including data
+sources, cleaning steps, and techniques applied to handle missing or
+inconsistent data.
+
+\subsection{Loading Data}\label{loading-data}
+
+The first step in any data analysis is to load the data. This section
+outlines the process of importing the data into R, including any
+necessary transformations or adjustments to ensure compatibility with
+the analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example of loading data from a CSV file}
+\CommentTok{\# raw\_data \textless{}{-} read\_csv(here("Data", "Raw", "data\_file.csv"))}
+\CommentTok{\# raw\_data \textless{}{-} read\_excel(here("Data", "Raw", "data\_file.xlsx"))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Cleaning Data}\label{cleaning-data}
+
+The data cleaning process involves several steps to ensure the data is
+in a suitable format for analysis. This includes handling missing
+values, correcting data types, and removing duplicates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example of cleaning data}
+\CommentTok{\# {-} Removing duplicates}
+\CommentTok{\# {-} Handling missing values}
+\CommentTok{\# {-} Converting data types and cleaning white space}
+\CommentTok{\# {-} Renaming columns, etc.}
+
+\CommentTok{\# cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
+\CommentTok{\#   clean\_names() \%\textgreater{}\%}
+\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\% \# convert to date}
+\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\% \# convert to numeric}
+\CommentTok{\#   mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% \# clean whitespace}
+\CommentTok{\#   drop\_na()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Data Exploration}\label{data-exploration}
+
+Data exploration is a crucial step in understanding the dataset and
+identifying patterns or anomalies. This section includes summary
+statistics, visualizations, and any other relevant analyses to gain
+insights into the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Explore the cleaned data using basic summaries:}
+\CommentTok{\# glimpse(cleaned\_data)}
+\CommentTok{\# summary(cleaned\_data)}
+\CommentTok{\# str(cleaned\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Data Visualization}\label{data-visualization}
+
+Data visualization is an essential part of data analysis, allowing for
+the communication of findings in a clear and effective manner. This
+section includes various plots and charts to illustrate key insights
+from the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example of creating a summary table }
+\CommentTok{\# summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
+\CommentTok{\#   group\_by(group\_var) \%\textgreater{}\%}
+\CommentTok{\#   summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
+\CommentTok{\#   ungroup() \%\textgreater{}\%}
+\CommentTok{\#   kable() \%\textgreater{}\%}
+\CommentTok{\#   kable\_styling(full\_width = F, position = "left") }
+
+\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables, "summary\_table.html"),}
+\CommentTok{\#   bootstrap\_options = c("striped", "hover", "condensed"),}
+\CommentTok{\#   full\_width = F, position = "left")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example of visualization plot}
+\CommentTok{\# ggplot(cleaned\_data, aes(x = var1, y = var2)) +}
+\CommentTok{\#   geom\_point() +}
+\CommentTok{\#   theme\_minimal()}
+
+\CommentTok{\# Example of saving a plot}
+\CommentTok{\# ggsave(filename = here(output\_path\_images, "plot\_name.png"), plot = last\_plot(), width = 6, height = 4)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Literature Cited}\label{literature-cited}
+
+Citing the packages and data used in the analysis is important for
+reproducibility and transparency. The following code generates a
+bibliography of all loaded packages.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Site packages and data used here }
+\CommentTok{\# Generate citations for loaded packages}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{write\_bib}\NormalTok{(}\FunctionTok{.packages}\NormalTok{(), }\FunctionTok{here}\NormalTok{(}\StringTok{"Docs"}\NormalTok{, }\StringTok{"References"}\NormalTok{, }\StringTok{"references.bib"}\NormalTok{))}
+
+\CommentTok{\# Generate a session info report}
+\NormalTok{sessioninfo}\SpecialCharTok{::}\FunctionTok{session\_info}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## - Session info ---------------------------------------------------------------
+##  setting  value
+##  version  R version 4.4.2 (2024-10-31)
+##  os       macOS Sequoia 15.3.2
+##  system   aarch64, darwin20
+##  ui       X11
+##  language (EN)
+##  collate  en_US.UTF-8
+##  ctype    en_US.UTF-8
+##  tz       America/Los_Angeles
+##  date     2025-04-05
+##  pandoc   3.2 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64/ (via rmarkdown)
+##  quarto   1.5.57 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto
+## 
+## - Packages -------------------------------------------------------------------
+##  package     * version    date (UTC) lib source
+##  bitops        1.0-9      2024-10-03 [1] CRAN (R 4.4.1)
+##  cachem        1.1.0      2024-05-16 [1] CRAN (R 4.4.0)
+##  cellranger    1.1.0      2016-07-27 [1] CRAN (R 4.4.0)
+##  class         7.3-23     2025-01-01 [1] CRAN (R 4.4.1)
+##  classInt      0.4-11     2025-01-08 [1] CRAN (R 4.4.1)
+##  cli           3.6.4      2025-02-13 [1] CRAN (R 4.4.1)
+##  codetools     0.2-20     2024-03-31 [1] CRAN (R 4.4.2)
+##  colorspace    2.1-1      2024-07-26 [1] CRAN (R 4.4.0)
+##  cowplot     * 1.1.3      2024-01-22 [1] CRAN (R 4.4.0)
+##  crayon        1.5.3      2024-06-20 [1] CRAN (R 4.4.0)
+##  data.table    1.17.0     2025-02-22 [1] CRAN (R 4.4.1)
+##  DBI           1.2.3      2024-06-02 [1] CRAN (R 4.4.0)
+##  devtools    * 2.4.5      2022-10-11 [1] CRAN (R 4.4.0)
+##  digest        0.6.37     2024-08-19 [1] CRAN (R 4.4.1)
+##  dplyr       * 1.1.4      2023-11-17 [1] CRAN (R 4.4.0)
+##  e1071         1.7-16     2024-09-16 [1] CRAN (R 4.4.1)
+##  ellipsis      0.3.2      2021-04-29 [1] CRAN (R 4.4.0)
+##  evaluate      1.0.3      2025-01-10 [1] CRAN (R 4.4.1)
+##  farver        2.1.2      2024-05-13 [1] CRAN (R 4.4.0)
+##  fastmap       1.2.0      2024-05-15 [1] CRAN (R 4.4.0)
+##  forcats     * 1.0.0      2023-01-29 [1] CRAN (R 4.4.0)
+##  fs            1.6.5      2024-10-30 [1] CRAN (R 4.4.1)
+##  generics      0.1.3      2022-07-05 [1] CRAN (R 4.4.0)
+##  gganimate   * 1.0.9.9000 2025-03-20 [1] Github (thomasp85/gganimate@b46d1ff)
+##  ggmap       * 4.0.0      2023-11-19 [1] CRAN (R 4.4.0)
+##  ggplot2     * 3.5.1      2024-04-23 [1] CRAN (R 4.4.0)
+##  ggrepel     * 0.9.6      2024-09-07 [1] CRAN (R 4.4.1)
+##  ggtext      * 0.1.2      2022-09-16 [1] CRAN (R 4.4.0)
+##  gifski        1.32.0-2   2025-03-18 [1] CRAN (R 4.4.1)
+##  glue        * 1.8.0      2024-09-30 [1] CRAN (R 4.4.1)
+##  gridtext      0.1.5      2022-09-16 [1] CRAN (R 4.4.0)
+##  gtable        0.3.6      2024-10-25 [1] CRAN (R 4.4.1)
+##  here        * 1.0.1      2020-12-13 [1] CRAN (R 4.4.0)
+##  hms           1.1.3      2023-03-21 [1] CRAN (R 4.4.0)
+##  htmltools     0.5.8.1    2024-04-04 [1] CRAN (R 4.4.0)
+##  htmlwidgets   1.6.4      2023-12-06 [1] CRAN (R 4.4.0)
+##  httpuv        1.6.15     2024-03-26 [1] CRAN (R 4.4.0)
+##  httr          1.4.7      2023-08-15 [1] CRAN (R 4.4.0)
+##  janitor     * 2.2.1      2024-12-22 [1] CRAN (R 4.4.1)
+##  jpeg          0.1-11     2025-03-21 [1] CRAN (R 4.4.1)
+##  jsonlite      2.0.0      2025-03-27 [1] CRAN (R 4.4.1)
+##  kableExtra  * 1.4.0      2024-01-24 [1] CRAN (R 4.4.0)
+##  KernSmooth    2.23-26    2025-01-01 [1] CRAN (R 4.4.1)
+##  knitr       * 1.50       2025-03-16 [1] CRAN (R 4.4.1)
+##  later         1.4.1      2024-11-27 [1] CRAN (R 4.4.1)
+##  lattice       0.22-7     2025-04-02 [1] CRAN (R 4.4.1)
+##  lazyeval      0.2.2      2019-03-15 [1] CRAN (R 4.4.0)
+##  lifecycle     1.0.4      2023-11-07 [1] CRAN (R 4.4.0)
+##  lubridate   * 1.9.4      2024-12-08 [1] CRAN (R 4.4.1)
+##  magrittr      2.0.3      2022-03-30 [1] CRAN (R 4.4.0)
+##  memoise       2.0.1      2021-11-26 [1] CRAN (R 4.4.0)
+##  mime          0.13       2025-03-17 [1] CRAN (R 4.4.1)
+##  miniUI        0.1.1.1    2018-05-18 [1] CRAN (R 4.4.0)
+##  munsell       0.5.1      2024-04-01 [1] CRAN (R 4.4.0)
+##  pacman      * 0.5.1      2019-03-11 [1] CRAN (R 4.4.0)
+##  patchwork   * 1.3.0      2024-09-16 [1] CRAN (R 4.4.1)
+##  pillar        1.10.2     2025-04-05 [1] Github (r-lib/pillar@b83965f)
+##  pkgbuild      1.4.7      2025-03-24 [1] CRAN (R 4.4.1)
+##  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.4.0)
+##  pkgload       1.4.0      2024-06-28 [1] CRAN (R 4.4.0)
+##  plotly      * 4.10.4     2024-01-13 [1] CRAN (R 4.4.0)
+##  plyr          1.8.9      2023-10-02 [1] CRAN (R 4.4.0)
+##  png           0.1-8      2022-11-29 [1] CRAN (R 4.4.0)
+##  prettyunits   1.2.0      2023-09-24 [1] CRAN (R 4.4.0)
+##  profvis       0.4.0      2024-09-20 [1] CRAN (R 4.4.1)
+##  progress      1.2.3      2023-12-06 [1] CRAN (R 4.4.0)
+##  promises      1.3.2      2024-11-28 [1] CRAN (R 4.4.1)
+##  proxy         0.4-27     2022-06-09 [1] CRAN (R 4.4.0)
+##  purrr       * 1.0.4      2025-02-05 [1] CRAN (R 4.4.1)
+##  R6            2.6.1      2025-02-15 [1] CRAN (R 4.4.1)
+##  rappdirs      0.3.3      2021-01-31 [1] CRAN (R 4.4.0)
+##  raster      * 3.6-32     2025-03-28 [1] CRAN (R 4.4.1)
+##  Rcpp          1.0.14     2025-01-12 [1] CRAN (R 4.4.1)
+##  readr       * 2.1.5      2024-01-10 [1] CRAN (R 4.4.0)
+##  readxl      * 1.4.5      2025-03-07 [1] CRAN (R 4.4.1)
+##  remotes     * 2.5.0      2024-03-17 [1] CRAN (R 4.4.0)
+##  rlang         1.1.5      2025-01-17 [1] CRAN (R 4.4.1)
+##  rmarkdown   * 2.29       2024-11-04 [1] CRAN (R 4.4.1)
+##  rprojroot     2.0.4      2023-11-05 [1] CRAN (R 4.4.0)
+##  rstudioapi    0.17.1     2024-10-22 [1] CRAN (R 4.4.1)
+##  scales      * 1.3.0      2023-11-28 [1] CRAN (R 4.4.0)
+##  sessioninfo * 1.2.3      2025-02-05 [1] CRAN (R 4.4.1)
+##  sf          * 1.0-20     2025-03-24 [1] CRAN (R 4.4.1)
+##  shiny         1.10.0     2024-12-14 [1] CRAN (R 4.4.1)
+##  snakecase     0.11.1     2023-08-27 [1] CRAN (R 4.4.0)
+##  sp          * 2.2-0      2025-02-01 [1] CRAN (R 4.4.1)
+##  stringi       1.8.7      2025-03-27 [1] CRAN (R 4.4.1)
+##  stringr     * 1.5.1      2023-11-14 [1] CRAN (R 4.4.0)
+##  svglite       2.1.3      2023-12-08 [1] CRAN (R 4.4.0)
+##  systemfonts   1.2.2      2025-04-04 [1] CRAN (R 4.4.1)
+##  terra         1.8-42     2025-04-02 [1] CRAN (R 4.4.1)
+##  tibble      * 3.2.1      2023-03-20 [1] CRAN (R 4.4.0)
+##  tidyr       * 1.3.1      2024-01-24 [1] CRAN (R 4.4.0)
+##  tidyselect    1.2.1      2024-03-11 [1] CRAN (R 4.4.0)
+##  tidyverse   * 2.0.0      2023-02-22 [1] CRAN (R 4.4.0)
+##  tigris      * 2.1        2024-01-24 [1] CRAN (R 4.4.0)
+##  timechange    0.3.0      2024-01-18 [1] CRAN (R 4.4.0)
+##  tweenr        2.0.3      2024-02-26 [1] CRAN (R 4.4.0)
+##  tzdb          0.5.0      2025-03-15 [1] CRAN (R 4.4.1)
+##  units         0.8-7      2025-03-11 [1] CRAN (R 4.4.1)
+##  urlchecker    1.0.1      2021-11-30 [1] CRAN (R 4.4.0)
+##  usethis     * 3.1.0      2024-11-26 [1] CRAN (R 4.4.1)
+##  uuid          1.2-1      2024-07-29 [1] CRAN (R 4.4.0)
+##  vctrs         0.6.5      2023-12-01 [1] CRAN (R 4.4.0)
+##  viridisLite   0.4.2      2023-05-02 [1] CRAN (R 4.4.0)
+##  withr         3.0.2      2024-10-28 [1] CRAN (R 4.4.1)
+##  xfun          0.52       2025-04-02 [1] CRAN (R 4.4.1)
+##  xml2          1.3.8      2025-03-14 [1] CRAN (R 4.4.1)
+##  xtable        1.8-4      2019-04-21 [1] CRAN (R 4.4.0)
+##  yaml          2.3.10     2024-07-26 [1] CRAN (R 4.4.0)
+## 
+##  [1] /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library
+##  * -- Packages attached to the search path.
+## 
+## ------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print out citation information for packages}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"\#\#\# BibTeX Citations}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ### BibTeX Citations
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"To cite the packages used in this analysis, please refer to the BibTeX entries below:}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## To cite the packages used in this analysis, please refer to the BibTeX entries below:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}bibtex}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ```bibtex
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\FunctionTok{readLines}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Docs"}\NormalTok{, }\StringTok{"References"}\NormalTok{, }\StringTok{"references.bib"}\NormalTok{)), }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## @Manual{R-base,
+##   title = {R: A Language and Environment for Statistical Computing},
+##   author = {{R Core Team}},
+##   organization = {R Foundation for Statistical Computing},
+##   address = {Vienna, Austria},
+##   year = {2024},
+##   url = {https://www.R-project.org/},
+## }
+## 
+## @Manual{R-cowplot,
+##   title = {cowplot: Streamlined Plot Theme and Plot Annotations for ggplot2},
+##   author = {Claus O. Wilke},
+##   year = {2024},
+##   note = {R package version 1.1.3},
+##   url = {https://wilkelab.org/cowplot/},
+## }
+## 
+## @Manual{R-devtools,
+##   title = {devtools: Tools to Make Developing R Packages Easier},
+##   author = {Hadley Wickham and Jim Hester and Winston Chang and Jennifer Bryan},
+##   year = {2022},
+##   note = {R package version 2.4.5},
+##   url = {https://devtools.r-lib.org/},
+## }
+## 
+## @Manual{R-dplyr,
+##   title = {dplyr: A Grammar of Data Manipulation},
+##   author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller and Davis Vaughan},
+##   year = {2023},
+##   note = {R package version 1.1.4},
+##   url = {https://dplyr.tidyverse.org},
+## }
+## 
+## @Manual{R-forcats,
+##   title = {forcats: Tools for Working with Categorical Variables (Factors)},
+##   author = {Hadley Wickham},
+##   year = {2023},
+##   note = {R package version 1.0.0},
+##   url = {https://forcats.tidyverse.org/},
+## }
+## 
+## @Manual{R-gganimate,
+##   title = {gganimate: A Grammar of Animated Graphics},
+##   author = {Thomas Lin Pedersen and David Robinson},
+##   year = {2025},
+##   note = {R package version 1.0.9.9000},
+##   url = {https://gganimate.com},
+## }
+## 
+## @Manual{R-ggmap,
+##   title = {ggmap: Spatial Visualization with ggplot2},
+##   author = {David Kahle and Hadley Wickham and Scott Jackson},
+##   year = {2023},
+##   note = {R package version 4.0.0},
+##   url = {https://github.com/dkahle/ggmap},
+## }
+## 
+## @Manual{R-ggplot2,
+##   title = {ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics},
+##   author = {Hadley Wickham and Winston Chang and Lionel Henry and Thomas Lin Pedersen and Kohske Takahashi and Claus Wilke and Kara Woo and Hiroaki Yutani and Dewey Dunnington and Teun {van den Brand}},
+##   year = {2024},
+##   note = {R package version 3.5.1},
+##   url = {https://ggplot2.tidyverse.org},
+## }
+## 
+## @Manual{R-ggrepel,
+##   title = {ggrepel: Automatically Position Non-Overlapping Text Labels with
+## ggplot2},
+##   author = {Kamil Slowikowski},
+##   year = {2024},
+##   note = {R package version 0.9.6},
+##   url = {https://ggrepel.slowkow.com/},
+## }
+## 
+## @Manual{R-ggtext,
+##   title = {ggtext: Improved Text Rendering Support for ggplot2},
+##   author = {Claus O. Wilke and Brenton M. Wiernik},
+##   year = {2022},
+##   note = {R package version 0.1.2},
+##   url = {https://wilkelab.org/ggtext/},
+## }
+## 
+## @Manual{R-glue,
+##   title = {glue: Interpreted String Literals},
+##   author = {Jim Hester and Jennifer Bryan},
+##   year = {2024},
+##   note = {R package version 1.8.0},
+##   url = {https://glue.tidyverse.org/},
+## }
+## 
+## @Manual{R-here,
+##   title = {here: A Simpler Way to Find Your Files},
+##   author = {Kirill Müller},
+##   year = {2020},
+##   note = {R package version 1.0.1},
+##   url = {https://here.r-lib.org/},
+## }
+## 
+## @Manual{R-janitor,
+##   title = {janitor: Simple Tools for Examining and Cleaning Dirty Data},
+##   author = {Sam Firke},
+##   year = {2024},
+##   note = {R package version 2.2.1},
+##   url = {https://github.com/sfirke/janitor},
+## }
+## 
+## @Manual{R-kableExtra,
+##   title = {kableExtra: Construct Complex Table with kable and Pipe Syntax},
+##   author = {Hao Zhu},
+##   year = {2024},
+##   note = {R package version 1.4.0},
+##   url = {http://haozhu233.github.io/kableExtra/},
+## }
+## 
+## @Manual{R-knitr,
+##   title = {knitr: A General-Purpose Package for Dynamic Report Generation in R},
+##   author = {Yihui Xie},
+##   year = {2025},
+##   note = {R package version 1.50},
+##   url = {https://yihui.org/knitr/},
+## }
+## 
+## @Manual{R-lubridate,
+##   title = {lubridate: Make Dealing with Dates a Little Easier},
+##   author = {Vitalie Spinu and Garrett Grolemund and Hadley Wickham},
+##   year = {2024},
+##   note = {R package version 1.9.4},
+##   url = {https://lubridate.tidyverse.org},
+## }
+## 
+## @Manual{R-pacman,
+##   title = {pacman: Package Management Tool},
+##   author = {Tyler Rinker and Dason Kurkiewicz},
+##   year = {2019},
+##   note = {R package version 0.5.1},
+##   url = {https://github.com/trinker/pacman},
+## }
+## 
+## @Manual{R-patchwork,
+##   title = {patchwork: The Composer of Plots},
+##   author = {Thomas Lin Pedersen},
+##   year = {2024},
+##   note = {R package version 1.3.0},
+##   url = {https://patchwork.data-imaginist.com},
+## }
+## 
+## @Manual{R-plotly,
+##   title = {plotly: Create Interactive Web Graphics via plotly.js},
+##   author = {Carson Sievert and Chris Parmer and Toby Hocking and Scott Chamberlain and Karthik Ram and Marianne Corvellec and Pedro Despouy},
+##   year = {2024},
+##   note = {R package version 4.10.4},
+##   url = {https://plotly-r.com},
+## }
+## 
+## @Manual{R-purrr,
+##   title = {purrr: Functional Programming Tools},
+##   author = {Hadley Wickham and Lionel Henry},
+##   year = {2025},
+##   note = {R package version 1.0.4},
+##   url = {https://purrr.tidyverse.org/},
+## }
+## 
+## @Manual{R-raster,
+##   title = {raster: Geographic Data Analysis and Modeling},
+##   author = {Robert J. Hijmans},
+##   year = {2025},
+##   note = {R package version 3.6-32},
+##   url = {https://rspatial.org/raster},
+## }
+## 
+## @Manual{R-readr,
+##   title = {readr: Read Rectangular Text Data},
+##   author = {Hadley Wickham and Jim Hester and Jennifer Bryan},
+##   year = {2024},
+##   note = {R package version 2.1.5},
+##   url = {https://readr.tidyverse.org},
+## }
+## 
+## @Manual{R-readxl,
+##   title = {readxl: Read Excel Files},
+##   author = {Hadley Wickham and Jennifer Bryan},
+##   year = {2025},
+##   note = {R package version 1.4.5},
+##   url = {https://readxl.tidyverse.org},
+## }
+## 
+## @Manual{R-remotes,
+##   title = {remotes: R Package Installation from Remote Repositories, Including
+## GitHub},
+##   author = {Gábor Csárdi and Jim Hester and Hadley Wickham and Winston Chang and Martin Morgan and Dan Tenenbaum},
+##   year = {2024},
+##   note = {R package version 2.5.0},
+##   url = {https://remotes.r-lib.org},
+## }
+## 
+## @Manual{R-rmarkdown,
+##   title = {rmarkdown: Dynamic Documents for R},
+##   author = {JJ Allaire and Yihui Xie and Christophe Dervieux and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and Richard Iannone},
+##   year = {2024},
+##   note = {R package version 2.29},
+##   url = {https://github.com/rstudio/rmarkdown},
+## }
+## 
+## @Manual{R-scales,
+##   title = {scales: Scale Functions for Visualization},
+##   author = {Hadley Wickham and Thomas Lin Pedersen and Dana Seidel},
+##   year = {2023},
+##   note = {R package version 1.3.0},
+##   url = {https://scales.r-lib.org},
+## }
+## 
+## @Manual{R-sessioninfo,
+##   title = {sessioninfo: R Session Information},
+##   author = {Hadley Wickham and Winston Chang and Robert Flight and Kirill Müller and Jim Hester},
+##   year = {2025},
+##   note = {R package version 1.2.3},
+##   url = {https://github.com/r-lib/sessioninfo#readme},
+## }
+## 
+## @Manual{R-sf,
+##   title = {sf: Simple Features for R},
+##   author = {Edzer Pebesma},
+##   year = {2025},
+##   note = {R package version 1.0-20},
+##   url = {https://r-spatial.github.io/sf/},
+## }
+## 
+## @Manual{R-sp,
+##   title = {sp: Classes and Methods for Spatial Data},
+##   author = {Edzer Pebesma and Roger Bivand},
+##   year = {2025},
+##   note = {R package version 2.2-0},
+##   url = {https://github.com/edzer/sp/},
+## }
+## 
+## @Manual{R-stringr,
+##   title = {stringr: Simple, Consistent Wrappers for Common String Operations},
+##   author = {Hadley Wickham},
+##   year = {2023},
+##   note = {R package version 1.5.1},
+##   url = {https://stringr.tidyverse.org},
+## }
+## 
+## @Manual{R-tibble,
+##   title = {tibble: Simple Data Frames},
+##   author = {Kirill Müller and Hadley Wickham},
+##   year = {2023},
+##   note = {R package version 3.2.1},
+##   url = {https://tibble.tidyverse.org/},
+## }
+## 
+## @Manual{R-tidyr,
+##   title = {tidyr: Tidy Messy Data},
+##   author = {Hadley Wickham and Davis Vaughan and Maximilian Girlich},
+##   year = {2024},
+##   note = {R package version 1.3.1},
+##   url = {https://tidyr.tidyverse.org},
+## }
+## 
+## @Manual{R-tidyverse,
+##   title = {tidyverse: Easily Install and Load the Tidyverse},
+##   author = {Hadley Wickham},
+##   year = {2023},
+##   note = {R package version 2.0.0},
+##   url = {https://tidyverse.tidyverse.org},
+## }
+## 
+## @Manual{R-tigris,
+##   title = {tigris: Load Census TIGER/Line Shapefiles},
+##   author = {Kyle Walker},
+##   year = {2024},
+##   note = {R package version 2.1},
+##   url = {https://github.com/walkerke/tigris},
+## }
+## 
+## @Manual{R-usethis,
+##   title = {usethis: Automate Package and Project Setup},
+##   author = {Hadley Wickham and Jennifer Bryan and Malcolm Barrett and Andy Teucher},
+##   year = {2024},
+##   note = {R package version 3.1.0},
+##   url = {https://usethis.r-lib.org},
+## }
+## 
+## @Article{ggmap2013,
+##   author = {David Kahle and Hadley Wickham},
+##   title = {ggmap: Spatial Visualization with ggplot2},
+##   journal = {The R Journal},
+##   year = {2013},
+##   volume = {5},
+##   number = {1},
+##   pages = {144--161},
+##   url = {https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf},
+## }
+## 
+## @Book{ggplot22016,
+##   author = {Hadley Wickham},
+##   title = {ggplot2: Elegant Graphics for Data Analysis},
+##   publisher = {Springer-Verlag New York},
+##   year = {2016},
+##   isbn = {978-3-319-24277-4},
+##   url = {https://ggplot2.tidyverse.org},
+## }
+## 
+## @Book{knitr2015,
+##   title = {Dynamic Documents with {R} and knitr},
+##   author = {Yihui Xie},
+##   publisher = {Chapman and Hall/CRC},
+##   address = {Boca Raton, Florida},
+##   year = {2015},
+##   edition = {2nd},
+##   note = {ISBN 978-1498716963},
+##   url = {https://yihui.org/knitr/},
+## }
+## 
+## @InCollection{knitr2014,
+##   booktitle = {Implementing Reproducible Computational Research},
+##   editor = {Victoria Stodden and Friedrich Leisch and Roger D. Peng},
+##   title = {knitr: A Comprehensive Tool for Reproducible Research in {R}},
+##   author = {Yihui Xie},
+##   publisher = {Chapman and Hall/CRC},
+##   year = {2014},
+##   note = {ISBN 978-1466561595},
+## }
+## 
+## @Article{lubridate2011,
+##   title = {Dates and Times Made Easy with {lubridate}},
+##   author = {Garrett Grolemund and Hadley Wickham},
+##   journal = {Journal of Statistical Software},
+##   year = {2011},
+##   volume = {40},
+##   number = {3},
+##   pages = {1--25},
+##   url = {https://www.jstatsoft.org/v40/i03/},
+## }
+## 
+## @Manual{pacman2018,
+##   title = {{pacman}: {P}ackage Management for {R}},
+##   author = {Tyler W. Rinker and Dason Kurkiewicz},
+##   address = {Buffalo, New York},
+##   note = {version 0.5.0},
+##   year = {2018},
+##   url = {http://github.com/trinker/pacman},
+## }
+## 
+## @Book{plotly2020,
+##   author = {Carson Sievert},
+##   title = {Interactive Web-Based Data Visualization with R, plotly, and shiny},
+##   publisher = {Chapman and Hall/CRC},
+##   year = {2020},
+##   isbn = {9781138331457},
+##   url = {https://plotly-r.com},
+## }
+## 
+## @Book{rmarkdown2018,
+##   title = {R Markdown: The Definitive Guide},
+##   author = {Yihui Xie and J.J. Allaire and Garrett Grolemund},
+##   publisher = {Chapman and Hall/CRC},
+##   address = {Boca Raton, Florida},
+##   year = {2018},
+##   isbn = {9781138359338},
+##   url = {https://bookdown.org/yihui/rmarkdown},
+## }
+## 
+## @Book{rmarkdown2020,
+##   title = {R Markdown Cookbook},
+##   author = {Yihui Xie and Christophe Dervieux and Emily Riederer},
+##   publisher = {Chapman and Hall/CRC},
+##   address = {Boca Raton, Florida},
+##   year = {2020},
+##   isbn = {9780367563837},
+##   url = {https://bookdown.org/yihui/rmarkdown-cookbook},
+## }
+## 
+## @Book{sf2023,
+##   author = {Edzer Pebesma and Roger Bivand},
+##   title = {{Spatial Data Science: With applications in R}},
+##   year = {2023},
+##   publisher = {{Chapman and Hall/CRC}},
+##   url = {https://r-spatial.org/book/},
+##   doi = {10.1201/9780429459016},
+## }
+## 
+## @Article{sf2018,
+##   author = {Edzer Pebesma},
+##   title = {{Simple Features for R: Standardized Support for Spatial Vector Data}},
+##   year = {2018},
+##   journal = {{The R Journal}},
+##   doi = {10.32614/RJ-2018-009},
+##   url = {https://doi.org/10.32614/RJ-2018-009},
+##   pages = {439--446},
+##   volume = {10},
+##   number = {1},
+## }
+## 
+## @Article{sp2005,
+##   author = {Edzer J. Pebesma and Roger Bivand},
+##   title = {Classes and methods for spatial data in {R}},
+##   journal = {R News},
+##   year = {2005},
+##   volume = {5},
+##   number = {2},
+##   pages = {9--13},
+##   month = {November},
+##   url = {https://CRAN.R-project.org/doc/Rnews/},
+## }
+## 
+## @Book{sp2013,
+##   author = {Roger S. Bivand and Edzer Pebesma and Virgilio Gomez-Rubio},
+##   title = {Applied spatial data analysis with {R}, Second edition},
+##   year = {2013},
+##   publisher = {Springer, NY},
+##   url = {https://asdar-book.org/},
+## }
+## 
+## @Article{tidyverse2019,
+##   title = {Welcome to the {tidyverse}},
+##   author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
+##   year = {2019},
+##   journal = {Journal of Open Source Software},
+##   volume = {4},
+##   number = {43},
+##   pages = {1686},
+##   doi = {10.21105/joss.01686},
+## }
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ```
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Optionally cite data sources here (example):}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{\#\#\# Data Sources}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## ### Data Sources
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"{-} Data source 1: [Name of Dataset or Study], [DOI/Link]}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## - Data source 1: [Name of Dataset or Study], [DOI/Link]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"{-} Data source 2: [Name of Dataset or Study], [DOI/Link]}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## - Data source 2: [Name of Dataset or Study], [DOI/Link]
+\end{verbatim}
+
+\end{document}

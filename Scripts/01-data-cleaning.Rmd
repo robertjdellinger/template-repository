@@ -12,17 +12,6 @@ output:
     fig_height: 4
     keep_tex: true
     latex_engine: xelatex
-    output: "Output/Reports"
-  html_document:
-    toc: true
-    toc_depth: 2
-    number_sections: true
-    fig_caption: true
-    fig_width: 6
-    fig_height: 4
-    keep_md: true
-    self_contained: false
-    output: "Docs"
 ---
 
 ```{r setup, include=FALSE}
@@ -60,7 +49,6 @@ knitr::opts_chunk$set(
   out.width = "100%",
   dpi = 600
 )
-
 ```
 
 # Introduction
