@@ -116,7 +116,6 @@ output_path_tables <- here("Output", "Tables")
 knitr::opts_chunk$set(
   echo = TRUE,
   cache = FALSE,
-    echo = TRUE,  # Show the source code
   results = 'markup',  # Display text output as code block
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
@@ -146,12 +145,7 @@ The data cleaning process involves several steps to ensure the data is in a suit
 
 ```{r wrangle-data}
 
-# Example of cleaning data
-# - Removing duplicates
-# - Handling missing values
-# - Converting data types and cleaning white space
-# - Renaming columns, etc.
-
+# cleaning the data using dplyr and tidyr
 # cleaned_data <- raw_data %>%
 #   clean_names() %>%
 #   mutate(column_name = as_factor(column_name)) %>% 
