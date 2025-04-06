@@ -46,11 +46,13 @@ Clone the repository:
 git clone git@github.com:your-username/Template_Repository.git
 cd Template_Repository
 ```
+---
 
-## Contact  
-Robert J. Dellinger  
-Ph.D. Student, Atmospheric & Oceanic Sciences, UCLA  
-Email: rjdellinger[at]ucla.edu  
-GitHub: [rob-dellinger](https://github.com/rob-dellinger)  
+### **Contact Information:**
+**Robert J. Dellinger**  
+**Ph.D. Student, Atmospheric & Oceanic Sciences, UCLA**  
+**rjdellinger[at]ucla.edu**  
+
+[![GitHub](https://img.shields.io/badge/GitHub-rob--dellinger-181717?logo=github&logoColor=white)](https://github.com/rob-dellinger)  
 
 ---
