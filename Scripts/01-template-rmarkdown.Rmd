@@ -46,6 +46,7 @@ header-includes:
   - \usepackage{amssymb}  # For additional math symbols
   - \usepackage{enumitem}  # For better control over list formatting
   - \usepackage{microtype}  # For including graphics
+  - \newpage  # Forces a page break after the table of contents
 ---
 
 # Introduction
