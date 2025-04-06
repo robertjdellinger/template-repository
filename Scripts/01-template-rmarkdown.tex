@@ -152,8 +152,6 @@
 \usepackage{microtype}
 \usepackage{fvextra}
 \usepackage{fontspec}
-\setmainfont{Times New Roman}
-\setsansfont{Arial}
 \setmonofont{Source Code Pro}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -220,6 +218,24 @@ The first step in any data analysis is to load the data, options, and
 packages. This section installs and loads the necessary packages, sets
 up the output paths, and defines chunk options for the RMarkdown
 document.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+\NormalTok{hook\_output }\OtherTok{=}\NormalTok{ knit\_hooks}\SpecialCharTok{$}\FunctionTok{get}\NormalTok{(}\StringTok{"output"}\NormalTok{)}
+\NormalTok{knit\_hooks}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{output =} \ControlFlowTok{function}\NormalTok{(x, options) \{}
+    \CommentTok{\# this hook is used only when the linewidth option is not NULL}
+    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(n }\OtherTok{\textless{}{-}}\NormalTok{ options}\SpecialCharTok{$}\NormalTok{linewidth)) \{}
+\NormalTok{        x }\OtherTok{=}\NormalTok{ xfun}\SpecialCharTok{::}\FunctionTok{split\_lines}\NormalTok{(x)}
+        \CommentTok{\# any lines wider than n should be wrapped}
+        \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{any}\NormalTok{(}\FunctionTok{nchar}\NormalTok{(x) }\SpecialCharTok{\textgreater{}}\NormalTok{ n))}
+\NormalTok{            x }\OtherTok{=} \FunctionTok{strwrap}\NormalTok{(x, }\AttributeTok{width =}\NormalTok{ n)}
+\NormalTok{        x }\OtherTok{=} \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{    \}}
+    \FunctionTok{hook\_output}\NormalTok{(x, options)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Loading Data}\label{loading-data}
 
