@@ -18,6 +18,7 @@ output:
       in_header: preamble.tex  
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
+latex-auto-install: true
 ---
 \newpage
 
