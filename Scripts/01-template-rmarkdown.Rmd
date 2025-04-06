@@ -76,7 +76,7 @@ d &= e + f
 
 The first step in any data analysis is to load the data, options, and packages. This section installs and loads the necessary packages, sets up the output paths, and defines chunk options for the RMarkdown document. 
 
-```{r setup-packages, include=FALSE, line.width=80}
+```{r setup-packages, include=FALSE}
 
 # Set up the environment and clear the workspace
 rm(list = ls())
