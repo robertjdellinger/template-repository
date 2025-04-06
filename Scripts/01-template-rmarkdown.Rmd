@@ -90,10 +90,9 @@ knitr::opts_chunk$set(
   results = 'markup',
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
-  out.width = "60%",
   dpi = 800,
   tidy = TRUE,
-  tidy.opts=list(width.cutoff=40))
+  tidy.opts=list(width.cutoff=60))
 
 ```
 
