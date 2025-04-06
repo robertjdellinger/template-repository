@@ -22,12 +22,7 @@ csl: "Docs/References/Styles/apa.csl"
 latex-auto-install: true
 ---
 \newpage
-<style>
-  code {
-    white-space : pre-wrap !important;
-    word-break: break-word;
-  }
-</style>
+
 
 # Introduction
 
@@ -57,6 +52,8 @@ a &= b + c \\
 d &= e + f
 \end{aligned}
 \]
+
+\newpage
 
 ## Setup Packages
 
@@ -212,6 +209,8 @@ grid.arrange(p1_npg, p2_npg, ncol = 2)
 # plot = last_plot(), width = 6, height = 4)
 
 ```
+
+
 
 \newpage
 
