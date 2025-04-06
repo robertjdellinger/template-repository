@@ -7,32 +7,26 @@ This repository provides a structured template for reproducible research project
 
 ## Structure  
 ```
-Template_Repository/
-│── README.md                # Project overview  
-│── LICENSE                  # Open-source license file  
-│── .gitignore               # Ignored files list  
-│── Template_Repository.Rproj # RStudio project file  
-│
-├── Data/                    # Raw and processed data  
-│   ├── Raw/                 # Unmodified, original datasets  
-│   ├── Processed/           # Cleaned and transformed datasets  
-│
-├── Scripts/                 # Code and analysis scripts  
-│   ├── 01_Data_Cleaning.Rmd   # Data preprocessing  
-│   ├── 02_Analysis.Rmd        # Statistical analysis  
-│   ├── 03_Visualization.Rmd   # Graphs and figures  
-│   ├── Functions/             # Custom functions for reuse  
-│       ├── Helper_Functions.R # Functions for common tasks  
-│
-├── Output/                  # Figures, reports, and results  
-│   ├── Figures/             # Plots and visualizations  
-│   ├── Reports/             # Final reports or papers  
-│   ├── Tables/              # Summary tables and results  
-│
-├── Docs/                    # Documentation and project notes  
-│   ├── References/          # Papers, references, notes  
-│   ├── Methodology.Rmd      # Explanation of methods used  
-```
+template-repository/
+├── Scripts/
+│   └── 01-report-template.Rmd
+├── Docs/
+│   ├── Themes/
+│   │   ├── preamble-pdf.tex
+│   │   └── html.css
+│   └── References/
+│       ├── references.bib
+│       └── Styles/
+│           └── apa.csl
+├── Output/
+│   ├── Figures/
+│   └── Tables/
+├── R/
+│   ├── utility_functions.R
+│   └── load_packages.R
+├── .gitignore
+├── README.md
+└── template-repository.Rproj
 
 ## How to use  
 1. Place raw data files in `Data/Raw/`.  
