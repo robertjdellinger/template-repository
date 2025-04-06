@@ -3,17 +3,20 @@ title: "Data Cleaning"
 author: "Robert J. Dellinger"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
+  # Set the output format to PDF and preferences
   pdf_document:
     toc: true
     toc_depth: 2
-    number_sections: true
+    number_sections: false
     fig_caption: true
     fig_width: 6
     fig_height: 4
-    keep_tex: true
+    keep_tex: false
     latex_engine: xelatex
-bibliography: "References/references.bib" # Path to .bib file
-# nocite: '@*'  # Include all references in the bibliography
+bibliography: "References/references.bib" # Path to bib file
+csl: "references/apa.csl"  # Path to APA CSL file
+cache: false  # Disable cache 
+# nocite: '@*'  # Include all references
 ---
 
 ```{r setup, include=FALSE}
@@ -144,9 +147,7 @@ Data visualization is an essential part of data analysis, allowing for the commu
 
 # Literature Cited
 
-Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use `[@key]` instead. 
-
-Packages cited are @R-ggplot2, @R-tidyverse, @R-dplyr, @R-tidyr, @R-janitor, @R-lubridate, @R-glue, @R-purrr, @R-here, @R-gganimate, @R-ggrepel, @R-ggtext, @R-scales, @R-kableExtra, @R-cowplot, @R-patchwork, @R-plotly, @R-sf, @R-tigris, @R-raster, and @R-knitr.
+Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base, @R-ggplot2, @R-tidyverse, @R-here. To put citations in parentheses, use `[@key]` instead. 
 
 ```{r literature-cited, echo=FALSE, include=FALSE}
 
