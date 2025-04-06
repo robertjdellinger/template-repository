@@ -16,32 +16,34 @@ output:
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 header-includes:
-  # Set page margins and use double-spacing 
+  # Page geometry and margins
   - \usepackage{geometry}
   - \geometry{left=1in, right=1in, top=1in, bottom=1in}
-  - \setlength{\textwidth}{6in}
+
+  # Font and typography adjustments
   - \usepackage{setspace}
   - \onehalfspacing
   - \usepackage{titlesec}
   - \titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+  - \usepackage{fontspec}  # Font management with fontspec
+  
+  # Header and footer customization
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \setlength{\headheight}{15pt}
   - \fancyhead[L]{}  # Left header (empty)
-  - \fancyhead[C]{Template RMarkdown File} 
+  - \fancyhead[C]{Template RMarkdown File}  # Centered header
   - \fancyhead[R]{}  # Right header (empty)
   - \fancyfoot[L]{}  # Left footer (empty)
   - \fancyfoot[C]{\thepage}  # Centered page number
-  - \fancyfoot[R]{}  
-  - \usepackage{hyperref}  # For clickable links in the PDF
-  - \usepackage{amsmath}  # For better math support
-  - \usepackage{amsfonts}  # For fonts related to mathematical symbols
-  - \usepackage{amssymb}  # For additional math symbols
-  - \usepackage{enumitem}  # For better control over list formatting
-  - \usepackage{microtype}  # For better typography 
-  - \usepackage{fvextra}  # For including graphics
-  - \usepackage{fontspec}
-  - \setmonofont{Source Code Pro}
+  - \fancyfoot[R]{}  # Right footer (empty)
+
+  # LaTeX packages for math and additional symbols
+  - \usepackage{amsmath}  # For math support
+  - \usepackage{amssymb}  # For extra math symbols
+
+  # Hyperlink support (ensure it's loaded last)
+  - \usepackage{hyperref}  # Hyperlinks and references
 editor_options: 
   chunk_output_type: console
 ---
@@ -115,24 +117,8 @@ knitr::opts_chunk$set(
   fig.path = paste0(output_path_images, "/Fig-"),
   fig.align = "center",
   out.width = "80%",
-  dpi = 800,
-  list(width.cutoff = 30), tidy = TRUE)
+  dpi = 800)
 
-```
-
-```{r wrap-hook}
-library(knitr)
-hook_output = knit_hooks$get('output')
-knit_hooks$set(output = function(x, options) {
-  # this hook is used only when the linewidth option is not NULL
-  if (!is.null(n <- options$linewidth)) {
-    x = xfun::split_lines(x)
-    # any lines wider than n should be wrapped
-    if (any(nchar(x) > n)) x = strwrap(x, width = n)
-    x = paste(x, collapse = '\n')
-  }
-  hook_output(x, options)
-})
 ```
 
 ## Loading Data
@@ -215,7 +201,7 @@ p1 <- ggplot(
 ) +
   geom_point(alpha = 0.7) +  
   geom_smooth(method = "loess", alpha = 0.05,
-  linewidth = 1, span = 1, formula = y ~ x) +  # Smoothing line
+  linewidth = 1, span = 1, formula = y ~ x) +  
   theme_bw() +  # White background theme
   theme(
     plot.title = element_text(hjust = 0.5),  # Center the title

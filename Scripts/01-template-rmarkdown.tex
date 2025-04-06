@@ -135,6 +135,7 @@
 \onehalfspacing
 \usepackage{titlesec}
 \titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+\usepackage{fontspec}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \setlength{\headheight}{15pt}
@@ -144,15 +145,9 @@
 \fancyfoot[L]{}
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{}
-\usepackage{hyperref}
 \usepackage{amsmath}
-\usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{enumitem}
-\usepackage{microtype}
-\usepackage{fvextra}
-\usepackage{fontspec}
-\setmonofont{Source Code Pro}
+\usepackage{hyperref}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -219,24 +214,6 @@ packages. This section installs and loads the necessary packages, sets
 up the output paths, and defines chunk options for the RMarkdown
 document.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(knitr)}
-\NormalTok{hook\_output }\OtherTok{=}\NormalTok{ knit\_hooks}\SpecialCharTok{$}\FunctionTok{get}\NormalTok{(}\StringTok{"output"}\NormalTok{)}
-\NormalTok{knit\_hooks}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{output =} \ControlFlowTok{function}\NormalTok{(x, options) \{}
-    \CommentTok{\# this hook is used only when the linewidth option is not NULL}
-    \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(n }\OtherTok{\textless{}{-}}\NormalTok{ options}\SpecialCharTok{$}\NormalTok{linewidth)) \{}
-\NormalTok{        x }\OtherTok{=}\NormalTok{ xfun}\SpecialCharTok{::}\FunctionTok{split\_lines}\NormalTok{(x)}
-        \CommentTok{\# any lines wider than n should be wrapped}
-        \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{any}\NormalTok{(}\FunctionTok{nchar}\NormalTok{(x) }\SpecialCharTok{\textgreater{}}\NormalTok{ n))}
-\NormalTok{            x }\OtherTok{=} \FunctionTok{strwrap}\NormalTok{(x, }\AttributeTok{width =}\NormalTok{ n)}
-\NormalTok{        x }\OtherTok{=} \FunctionTok{paste}\NormalTok{(x, }\AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\NormalTok{    \}}
-    \FunctionTok{hook\_output}\NormalTok{(x, options)}
-\NormalTok{\})}
-\end{Highlighting}
-\end{Shaded}
-
 \subsection{Loading Data}\label{loading-data}
 
 The following code loads the data from various sources, including CSV
@@ -246,9 +223,10 @@ that the code is portable and reproducible.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example of loading data from a CSV file raw\_data \textless{}{-} read\_csv(here(\textquotesingle{}Data\textquotesingle{},}
-\CommentTok{\# \textquotesingle{}Raw\textquotesingle{}, \textquotesingle{}data\_file.csv\textquotesingle{})) raw\_data \textless{}{-} read\_excel(here(\textquotesingle{}Data\textquotesingle{}, \textquotesingle{}Raw\textquotesingle{},}
-\CommentTok{\# \textquotesingle{}data\_file.xlsx\textquotesingle{})) raw\_data \textless{}{-} read\_sf(here(\textquotesingle{}Data\textquotesingle{}, \textquotesingle{}Raw\textquotesingle{}, \textquotesingle{}data\_file.shp\textquotesingle{}))}
+\CommentTok{\# Example of loading data from a CSV file}
+\CommentTok{\# raw\_data \textless{}{-} read\_csv(here("Data", "Raw", "data\_file.csv"))}
+\CommentTok{\# raw\_data \textless{}{-} read\_excel(here("Data", "Raw", "data\_file.xlsx"))}
+\CommentTok{\# raw\_data \textless{}{-} read\_sf(here("Data", "Raw", "data\_file.shp"))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -260,11 +238,14 @@ values, correcting data types, and removing duplicates.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# cleaning the data using dplyr and tidyr cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
-\CommentTok{\# clean\_names() \%\textgreater{}\% mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\%}
-\CommentTok{\# mutate(date\_column = as.Date(date\_column, format = \textquotesingle{}\%Y{-}\%m{-}\%d\textquotesingle{})) \%\textgreater{}\%}
-\CommentTok{\# mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\%}
-\CommentTok{\# mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% = drop\_na()}
+\CommentTok{\# cleaning the data using dplyr and tidyr}
+\CommentTok{\# cleaned\_data \textless{}{-} raw\_data \%\textgreater{}\%}
+\CommentTok{\#   clean\_names() \%\textgreater{}\%}
+\CommentTok{\#   mutate(column\_name = as\_factor(column\_name)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(date\_column = as.Date(date\_column, format = "\%Y{-}\%m{-}\%d")) \%\textgreater{}\% }
+\CommentTok{\#   mutate(numeric\_column = as.numeric(numeric\_column)) \%\textgreater{}\% }
+\CommentTok{\#   mutate(accross(everything(), \textasciitilde{}str\_squish(.))) \%\textgreater{}\% =}
+\CommentTok{\#   drop\_na()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -277,8 +258,10 @@ insights into the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Explore the cleaned data using basic summaries: glimpse(cleaned\_data)}
-\CommentTok{\# summary(cleaned\_data) str(cleaned\_data)}
+\CommentTok{\# Explore the cleaned data using basic summaries:}
+\CommentTok{\# glimpse(cleaned\_data)}
+\CommentTok{\# summary(cleaned\_data)}
+\CommentTok{\# str(cleaned\_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -291,14 +274,17 @@ from the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Example of creating a summary table summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
-\CommentTok{\# group\_by(group\_var) \%\textgreater{}\% summarise(mean\_value = mean(value\_var, na.rm = TRUE))}
-\CommentTok{\# \%\textgreater{}\% ungroup() \%\textgreater{}\% kable() \%\textgreater{}\% kable\_styling(full\_width = F, position =}
-\CommentTok{\# \textquotesingle{}left\textquotesingle{})}
+\CommentTok{\# Example of creating a summary table }
+\CommentTok{\# summary\_table \textless{}{-} cleaned\_data \%\textgreater{}\%}
+\CommentTok{\#   group\_by(group\_var) \%\textgreater{}\%}
+\CommentTok{\#   summarise(mean\_value = mean(value\_var, na.rm = TRUE)) \%\textgreater{}\%}
+\CommentTok{\#   ungroup() \%\textgreater{}\%}
+\CommentTok{\#   kable() \%\textgreater{}\%}
+\CommentTok{\#   kable\_styling(full\_width = F, position = "left") }
 
-\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables,}
-\CommentTok{\# \textquotesingle{}summary\_table.html\textquotesingle{}), bootstrap\_options = c(\textquotesingle{}striped\textquotesingle{}, \textquotesingle{}hover\textquotesingle{},}
-\CommentTok{\# \textquotesingle{}condensed\textquotesingle{}), full\_width = F, position = \textquotesingle{}left\textquotesingle{})}
+\CommentTok{\# save\_kable(summary\_table, file = here(output\_path\_tables, "summary\_table.html"),}
+\CommentTok{\#   bootstrap\_options = c("striped", "hover", "condensed"),}
+\CommentTok{\#   full\_width = F, position = "left")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -314,7 +300,7 @@ from the data.
 \NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  
   \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
-  \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x) }\SpecialCharTok{+}  \CommentTok{\# Smoothing line}
+  \AttributeTok{linewidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{span =} \DecValTok{1}\NormalTok{, }\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x) }\SpecialCharTok{+}  
   \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# White background theme}
   \FunctionTok{theme}\NormalTok{(}
     \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),  }\CommentTok{\# Center the title}
