@@ -144,7 +144,7 @@ Data visualization is an essential part of data analysis, allowing for the commu
 
 # Literature Cited
 
-Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax @key where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use [@key] instead. 
+Citing the packages and data used in the analysis is important for reproducibility and transparency. The following code generates a bibliography of all loaded packages. Items can be cited directly within the documentation using the syntax `@key` where key is the citation key in the first line of the entry, e.g., @R-base. To put citations in parentheses, use `[@key]` instead. 
 
 ```{r literature-cited, echo=FALSE, results='asis'}
 
@@ -154,7 +154,7 @@ knitr::write_bib(.packages(), here("Scripts", "References", "references.bib"))
 
 # Generate a session info report
 sessioninfo <- sessioninfo::session_info()
-print(sessioninfo[1]$platform %>% as_tibble())
+#print(sessioninfo[1]$platform %>% as_tibble())
 
 # Save session info to a CSV file
 write.csv(sessioninfo[1]$platform %>% as_tibble(), here("Docs", "References", "session_info.csv"))
