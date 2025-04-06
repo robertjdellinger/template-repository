@@ -24,12 +24,8 @@ header-includes:
   # Fancy headers and footers for better document structure
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
-  - \fancyhead[L]{}  # Left header (empty)
   - \fancyhead[C]{Template RMarkdown File}  # Center header
-  - \fancyhead[R]{}  # Right header (empty)
-  - \fancyfoot[L]{}  # Left footer (empty)
   - \fancyfoot[C]{\thepage}  # Centered page number in the footer
-  - \fancyfoot[R]{}  # Right footer (empty)
   # Handle graphics for better PDF output
   - \usepackage{graphicx}  # For including and adjusting graphics
   - \usepackage[font=small,labelfont=bf]{caption}  # Customize figure captions
