@@ -97,7 +97,6 @@
 
 % Language and font management
 \usepackage{babel}  % Multi-language support
-\usepackage[utf8]{inputenc}   % sets document encoding to utf8
 \usepackage{microtype}  % For better typography
 \usepackage{ragged2e} % justifying text
 \usepackage{tikz}
@@ -141,9 +140,9 @@
 % Left/Right header (empty)
 \fancyfoot[L,R]{}  
 % center of header
-\fancyhead[CO,CE]{Rmarkdown Template File}
+\fancyhead[C]{Rmarkdown Template File}
 % center of footer
-\fancyfoot[CO,CE]{\thepage}
+\fancyfoot[C]{\thepage}
 
 % Hyperlink and references setup
 \definecolor{urbnblue}{HTML}{1696D2}    % Defines the blue color
@@ -157,6 +156,28 @@
             urlcolor=blue,
             linkcolor=magenta,
             pdfborder={0 0 0}}
+
+% Listings for code formatting (R code)
+\usepackage{listings}
+\usepackage{xcolor}  % For color customization
+\lstdefinestyle{RStyle}{
+  language=R,                         % Set the language to R
+  basicstyle=\small\ttfamily,          % Use small size and monospaced font
+  backgroundcolor=\color{white},      % Set background color
+  showspaces=false,                   % Do not display spaces with underscores
+  showstringspaces=false,             % Do not underline spaces in strings
+  showtabs=false,                     % Do not display tabs with arrows
+  tabsize=2,                          % Set tab size to 2 spaces
+  breaklines=true,                    % Enable line breaking
+  breakatwhitespace=true,            % Break lines at whitespace
+  columns=fullflexible,
+  escapeinside = ||,
+  breakindent=0pt,
+  commentstyle=\color{urbnblue},          % Style for comments
+  keywordstyle=\color{black},          % Style for keywords
+  stringstyle=\color{black}           % Style for strings
+}
+\lstset{style=RStyle}
 
 
 
