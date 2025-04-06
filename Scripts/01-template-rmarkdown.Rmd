@@ -45,13 +45,6 @@ header-includes:
   - \usepackage{amsfonts}  # For fonts related to mathematical symbols
   - \usepackage{amssymb}  # For additional math symbols
   - \usepackage{enumitem}  # For better control over list formatting
-  - \usepackage{microtype}  # For including graphics
-  # Ensure content starts on a new page after the TOC
-  - \usepackage{titlesec}
-  - \titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
-  - \usepackage{fancyhdr}
-  - \fancyfoot[C]{\thepage}  # Centered page number
-  - \newpage  # Forces a page break after the table of contents
 ---
 
 # Introduction
