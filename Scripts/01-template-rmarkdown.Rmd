@@ -16,7 +16,7 @@ output:
     latex_engine: xelatex #better font and unicode support
     keep_md: false
     includes:
-      in_header: preamble.tex  
+      in_header: "Docs/Themes/preamble.tex"  
 bibliography: "Docs/References/references.bib"  
 csl: "Docs/References/Styles/apa.csl"  
 latex-auto-install: true
