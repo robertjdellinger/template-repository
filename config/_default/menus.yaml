@@ -1,0 +1,22 @@
+main:
+  - name: Home
+    url: /
+    weight: 1
+  - name: Bio & Experience
+    url: /experience/
+    weight: 5
+  - name: Research Projects
+    url: /research/
+    weight: 10
+  - name: Public Engagement
+    url: /events/
+    weight: 15
+  - name: Media
+    url: /media/
+    weight: 20
+  - name: Blog
+    url: /blog/
+    weight: 25
+  - name: Contact
+    url: /contact/
+    weight: 30

@@ -47,3 +47,8 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Hugo build artifacts
+.hugo_build.lock
+public/
+resources/

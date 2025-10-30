@@ -1,0 +1,12 @@
+baseURL: "https://robertjdellinger.github.io/"
+title: "Robert J. Dellinger"
+languageCode: "en-us"
+
+params:
+  description: "Ph.D. student in Atmospheric and Oceanic Sciences at UCLA"
+  author: "Robert J. Dellinger"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
