@@ -1,0 +1,535 @@
+---
+title: "**USEPA CDC Social Vulnerability Index (SVI) Analysis**"
+author: "Robert J. Dellinger"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+fontsize: 11pt
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    fig_caption: true
+    fig_width: 9
+    fig_height: 6
+    theme: flatly
+    highlight: tango
+    df_print: paged
+csl: "Docs/References/Styles/apa.csl"
+bibliography: "Docs/References/references.bib"
+---
+
+```{r setup-packages, include=FALSE}
+
+# Clear the workspace
+rm(list = ls())
+
+# Install pacman if needed
+if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
+library(pacman)
+
+# Load / install all required packages
+p_load(
+  # Data manipulation
+  tidyverse, dplyr, tidyr, stringr, readr, janitor, glue, purrr, here,
+  # Spatial data
+  sf, tigris,
+  # Visualization
+  ggplot2, ggrepel, scales, viridis, gridExtra, RColorBrewer,
+  # Tables
+  knitr, kableExtra,
+  # Reproducibility
+  sessioninfo
+)
+
+# Suppress tigris tile-cache messages
+options(tigris_use_cache = TRUE)
+
+# Output paths
+output_path_images <- here("Output", "Figures")
+output_path_tables <- here("Output", "Tables")
+
+# Global chunk defaults
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  cache   = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  out.width = "90%",
+  fig.path  = paste0(output_path_images, "/SVI-"),
+  fig.align = "center",
+  dpi = 300
+)
+
+```
+
+---
+
+# Introduction
+
+The **CDC/ATSDR Social Vulnerability Index (SVI)** is a publicly available dataset
+developed by the Centers for Disease Control and Prevention (CDC) and the Agency for
+Toxic Substances and Disease Registry (ATSDR). It uses 16 U.S. Census variables to
+rank counties and census tracts by their social vulnerability — the potential negative
+effects on communities caused by external stresses on human health.
+
+The SVI is widely used by the **U.S. Environmental Protection Agency (USEPA)** in
+environmental justice (EJ) analyses to identify communities that may be
+disproportionately burdened by environmental hazards and that may have limited
+capacity to prepare, respond to, and recover from those hazards.
+
+## SVI Themes
+
+The 16 variables are organized into **four themes**, each producing a percentile
+ranking (RPL). The four theme rankings are combined into a single
+**overall SVI score** (`RPL_THEMES`), ranging from 0 (least vulnerable) to
+1 (most vulnerable).
+
+| Theme | Key Variables |
+|----------|--------------|
+| **Theme 1 — Socioeconomic Status** | Poverty, unemployment, housing cost burden, no HS diploma, no health insurance |
+| **Theme 2 — Household Characteristics** | Age ≥65, Age ≤17, disability, single-parent households, limited English |
+| **Theme 3 — Racial & Ethnic Minority Status** | Racial & ethnic minority population |
+| **Theme 4 — Housing Type & Transportation** | Multi-unit structures, mobile homes, crowding, no vehicle, group quarters |
+
+---
+
+# Data Loading
+
+## Download CDC SVI County-Level Data (2022)
+
+The 2022 SVI data at the county level is downloaded directly from the
+CDC's public download portal. County-level data covers all 50 states,
+DC, and US territories (~3,200 records).
+
+```{r load-svi-data}
+
+# Direct CDC SVI 2022 county-level CSV URL
+svi_url <- paste0(
+  "https://svi.cdc.gov/Documents/Data/2022/csv/",
+  "SVI_2022_US_county.csv"
+)
+
+# Cache locally so we do not re-download on every knit
+svi_cache <- here("Data", "SVI_2022_US_county.csv")
+
+if (!file.exists(svi_cache)) {
+  download.file(svi_url, destfile = svi_cache, mode = "wb", quiet = TRUE)
+}
+
+svi_raw <- read_csv(svi_cache, show_col_types = FALSE)
+
+glimpse(svi_raw)
+
+```
+
+---
+
+# Data Cleaning
+
+## Standardise Column Names and Recode Missing Values
+
+The CDC SVI dataset uses `-999` as a sentinel for missing data. We replace
+these with `NA` across all numeric columns, clean column names with `janitor`,
+and select the key variables needed for analysis.
+
+```{r clean-svi-data}
+
+svi_clean <- svi_raw %>%
+  clean_names() %>%
+  # Replace CDC sentinel -999 with NA across all numeric columns
+  mutate(across(where(is.numeric), ~ na_if(., -999))) %>%
+  # Keep identifiers, population, overall SVI, and four theme RPLs
+  select(
+    fips       = fips,
+    state      = state,
+    county     = county,
+    location   = location,
+    area_sqmi  = area_sqmi,
+    e_totpop   = e_totpop,
+    # Overall SVI percentile ranking (0 = least, 1 = most vulnerable)
+    rpl_themes,
+    # Individual theme percentile rankings
+    rpl_theme1,   # Socioeconomic Status
+    rpl_theme2,   # Household Characteristics
+    rpl_theme3,   # Racial & Ethnic Minority Status
+    rpl_theme4,   # Housing Type & Transportation
+    # Component percentage estimates for deeper analysis
+    ep_pov150, ep_unemp, ep_hburd, ep_nohsdp, ep_uninsur,
+    ep_age65,  ep_age17, ep_disabl, ep_sngpnt, ep_limeng,
+    ep_minrty,
+    ep_munit,  ep_mobile, ep_crowd, ep_noveh, ep_groupq
+  ) %>%
+  # Assign vulnerability tier based on overall SVI quartiles
+  mutate(
+    svi_tier = case_when(
+      rpl_themes <= 0.25 ~ "Low (0-0.25)",
+      rpl_themes <= 0.50 ~ "Moderate (0.25-0.50)",
+      rpl_themes <= 0.75 ~ "High (0.50-0.75)",
+      rpl_themes >  0.75 ~ "Very High (>0.75)",
+      TRUE               ~ NA_character_
+    ),
+    svi_tier = factor(svi_tier, levels = c(
+      "Low (0-0.25)", "Moderate (0.25-0.50)",
+      "High (0.50-0.75)", "Very High (>0.75)"
+    ))
+  )
+
+cat("Rows:", nrow(svi_clean), " | Columns:", ncol(svi_clean), "\n")
+cat("Missing overall SVI values:", sum(is.na(svi_clean$rpl_themes)), "\n")
+
+```
+
+---
+
+# Exploratory Data Analysis
+
+## Summary Statistics by SVI Theme
+
+```{r eda-summary-stats}
+
+theme_labels <- c(
+  rpl_themes = "Overall SVI",
+  rpl_theme1 = "Theme 1: Socioeconomic",
+  rpl_theme2 = "Theme 2: Household",
+  rpl_theme3 = "Theme 3: Minority Status",
+  rpl_theme4 = "Theme 4: Housing & Transport"
+)
+
+svi_clean %>%
+  select(rpl_themes, rpl_theme1, rpl_theme2, rpl_theme3, rpl_theme4) %>%
+  pivot_longer(everything(), names_to = "theme", values_to = "rpl") %>%
+  group_by(theme) %>%
+  summarise(
+    n      = sum(!is.na(rpl)),
+    mean   = round(mean(rpl,   na.rm = TRUE), 3),
+    sd     = round(sd(rpl,     na.rm = TRUE), 3),
+    min    = round(min(rpl,    na.rm = TRUE), 3),
+    q25    = round(quantile(rpl, 0.25, na.rm = TRUE), 3),
+    median = round(median(rpl, na.rm = TRUE), 3),
+    q75    = round(quantile(rpl, 0.75, na.rm = TRUE), 3),
+    max    = round(max(rpl,    na.rm = TRUE), 3),
+    .groups = "drop"
+  ) %>%
+  mutate(theme = recode(theme, !!!theme_labels)) %>%
+  kable(
+    caption    = "Summary statistics for overall SVI and four theme percentile rankings (county level, 2022)",
+    col.names  = c("Theme", "N", "Mean", "SD", "Min", "Q25", "Median", "Q75", "Max")
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE,
+    position   = "left"
+  )
+
+```
+
+## Distribution of SVI Scores Across Themes
+
+```{r eda-distributions, fig.cap="Distribution of county-level SVI percentile rankings by theme (2022)"}
+
+svi_clean %>%
+  select(rpl_themes, rpl_theme1, rpl_theme2, rpl_theme3, rpl_theme4) %>%
+  pivot_longer(everything(), names_to = "theme", values_to = "rpl") %>%
+  mutate(theme = recode(theme, !!!theme_labels)) %>%
+  ggplot(aes(x = rpl, fill = theme)) +
+  geom_histogram(binwidth = 0.05, colour = "white", alpha = 0.85) +
+  facet_wrap(~ theme, ncol = 2, scales = "free_y") +
+  scale_fill_brewer(palette = "Set2", guide = "none") +
+  scale_x_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title    = "Distribution of CDC SVI Percentile Rankings by Theme",
+    subtitle = "County-level data, United States (2022)",
+    x        = "Percentile Ranking (RPL)",
+    y        = "Number of Counties",
+    caption  = "Source: CDC/ATSDR Social Vulnerability Index 2022"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
+    strip.text    = element_text(face = "bold")
+  )
+
+```
+
+## Vulnerability Tier Breakdown
+
+```{r eda-tier-breakdown, fig.cap="County counts by SVI vulnerability tier"}
+
+tier_counts <- svi_clean %>%
+  filter(!is.na(svi_tier)) %>%
+  count(svi_tier) %>%
+  mutate(pct = n / sum(n))
+
+tier_counts %>%
+  kable(
+    caption   = "Number and proportion of US counties by SVI vulnerability tier (2022)",
+    col.names = c("Vulnerability Tier", "Counties (N)", "Proportion")
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE, position = "left"
+  )
+
+ggplot(tier_counts, aes(x = svi_tier, y = n, fill = svi_tier)) +
+  geom_col(colour = "white", width = 0.7) +
+  geom_text(aes(label = paste0(n, "\n(", percent(pct, accuracy = 0.1), ")")),
+            vjust = -0.3, size = 3.5, fontface = "bold") +
+  scale_fill_brewer(palette = "RdYlGn", direction = -1, guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12))) +
+  labs(
+    title    = "US Counties by SVI Vulnerability Tier (2022)",
+    subtitle = "Tiers defined by quartiles of the overall RPL_THEMES score",
+    x        = "Vulnerability Tier",
+    y        = "Number of Counties",
+    caption  = "Source: CDC/ATSDR Social Vulnerability Index 2022"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey40")
+  )
+
+```
+
+## State-Level Mean SVI Rankings
+
+```{r eda-state-means, fig.height=9, fig.cap="Mean overall SVI score by state (2022)"}
+
+state_means <- svi_clean %>%
+  filter(!is.na(rpl_themes)) %>%
+  group_by(state) %>%
+  summarise(
+    n_counties   = n(),
+    mean_svi     = mean(rpl_themes, na.rm = TRUE),
+    mean_theme1  = mean(rpl_theme1, na.rm = TRUE),
+    mean_theme2  = mean(rpl_theme2, na.rm = TRUE),
+    mean_theme3  = mean(rpl_theme3, na.rm = TRUE),
+    mean_theme4  = mean(rpl_theme4, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(mean_svi))
+
+ggplot(state_means, aes(x = mean_svi,
+                        y = reorder(state, mean_svi),
+                        fill = mean_svi)) +
+  geom_col(colour = "white", width = 0.75) +
+  scale_fill_viridis_c(option = "magma", direction = -1, name = "Mean SVI") +
+  scale_x_continuous(labels = percent_format(accuracy = 1),
+                     expand = expansion(mult = c(0, 0.03))) +
+  labs(
+    title    = "Mean Overall CDC SVI Score by State (2022)",
+    subtitle = "Average of county-level RPL_THEMES (0 = least, 1 = most vulnerable)",
+    x        = "Mean SVI Percentile Ranking",
+    y        = NULL,
+    caption  = "Source: CDC/ATSDR Social Vulnerability Index 2022"
+  ) +
+  theme_bw(base_size = 11) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
+    legend.position = "right"
+  )
+
+```
+
+---
+
+# Spatial Analysis
+
+## Choropleth Map — Overall SVI
+
+```{r spatial-load-counties}
+
+# Download US county boundaries (2022, no water areas)
+counties_sf <- counties(cb = TRUE, resolution = "20m", year = 2022) %>%
+  shift_geometry() %>%
+  clean_names() %>%
+  mutate(fips = paste0(statefp, countyfp))
+
+# Join SVI data to spatial boundaries
+svi_sf <- counties_sf %>%
+  left_join(svi_clean, by = "fips") %>%
+  filter(!is.na(rpl_themes))
+
+```
+
+```{r spatial-map-overall, fig.width=12, fig.height=7, fig.cap="Choropleth map of overall CDC SVI score by county, contiguous US (2022)"}
+
+ggplot(svi_sf) +
+  geom_sf(aes(fill = rpl_themes), colour = NA) +
+  scale_fill_viridis_c(
+    option   = "magma",
+    direction = -1,
+    name     = "SVI\nPercentile",
+    labels   = percent_format(accuracy = 1),
+    na.value = "grey80"
+  ) +
+  labs(
+    title    = "CDC Social Vulnerability Index — Overall Score (2022)",
+    subtitle = "County-level RPL_THEMES: 0 = least vulnerable, 1 = most vulnerable",
+    caption  = "Source: CDC/ATSDR SVI 2022 | Boundaries: US Census Bureau TIGER/Line"
+  ) +
+  theme_void(base_size = 12) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5, size = 14),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
+    plot.caption  = element_text(hjust = 0.5, color = "grey50", size = 9),
+    legend.position = "right"
+  )
+
+```
+
+## Choropleth Maps — Four SVI Themes
+
+```{r spatial-map-themes, fig.width=14, fig.height=10, fig.cap="Choropleth maps by CDC SVI theme (county level, 2022)"}
+
+theme_var_labels <- c(
+  rpl_theme1 = "Theme 1: Socioeconomic Status",
+  rpl_theme2 = "Theme 2: Household Characteristics",
+  rpl_theme3 = "Theme 3: Racial & Ethnic Minority",
+  rpl_theme4 = "Theme 4: Housing & Transportation"
+)
+
+plot_theme_map <- function(var, label) {
+  ggplot(svi_sf) +
+    geom_sf(aes(fill = .data[[var]]), colour = NA) +
+    scale_fill_viridis_c(
+      option    = "plasma",
+      direction = -1,
+      name      = "RPL",
+      labels    = percent_format(accuracy = 1),
+      na.value  = "grey80"
+    ) +
+    labs(title = label) +
+    theme_void(base_size = 10) +
+    theme(
+      plot.title      = element_text(face = "bold", hjust = 0.5, size = 11),
+      legend.position = "right",
+      legend.key.height = unit(0.8, "cm")
+    )
+}
+
+map_plots <- imap(theme_var_labels, plot_theme_map)
+
+grid.arrange(grobs = map_plots, ncol = 2,
+             top = "CDC SVI Percentile Rankings by Theme — US Counties (2022)")
+
+```
+
+---
+
+# Correlation Analysis
+
+## Pairwise Correlations Between SVI Themes
+
+```{r correlation-matrix, fig.cap="Pairwise scatter plots of SVI theme percentile rankings (county level, 2022)"}
+
+svi_cor_data <- svi_clean %>%
+  select(
+    `Overall SVI`     = rpl_themes,
+    `Theme 1\nSocioeconomic` = rpl_theme1,
+    `Theme 2\nHousehold`     = rpl_theme2,
+    `Theme 3\nMinority`      = rpl_theme3,
+    `Theme 4\nHousing`       = rpl_theme4
+  ) %>%
+  drop_na()
+
+cor_matrix <- cor(svi_cor_data, use = "complete.obs") %>%
+  round(3)
+
+cor_matrix %>%
+  kable(caption = "Pearson correlation matrix of SVI overall score and theme rankings") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE, position = "left"
+  )
+
+```
+
+## Scatter — Socioeconomic vs. Minority Status by Vulnerability Tier
+
+```{r scatter-theme1-theme3, fig.cap="County-level SVI Theme 1 (Socioeconomic) vs. Theme 3 (Minority Status) by vulnerability tier"}
+
+svi_clean %>%
+  filter(!is.na(rpl_theme1), !is.na(rpl_theme3), !is.na(svi_tier)) %>%
+  ggplot(aes(x = rpl_theme1, y = rpl_theme3, colour = svi_tier)) +
+  geom_point(alpha = 0.45, size = 1.2) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, colour = "black",
+              linetype = "dashed") +
+  scale_colour_brewer(palette = "RdYlGn", direction = -1,
+                      name = "Vulnerability Tier") +
+  scale_x_continuous(labels = percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title    = "Socioeconomic Status vs. Racial & Ethnic Minority Status",
+    subtitle = "County-level SVI theme percentile rankings (2022)",
+    x        = "Theme 1 RPL: Socioeconomic Status",
+    y        = "Theme 3 RPL: Racial & Ethnic Minority",
+    caption  = "Source: CDC/ATSDR Social Vulnerability Index 2022"
+  ) +
+  theme_bw(base_size = 12) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
+    legend.position = "bottom"
+  ) +
+  guides(colour = guide_legend(override.aes = list(alpha = 1, size = 3)))
+
+```
+
+## Top 25 Most Vulnerable Counties
+
+```{r top-vulnerable-counties}
+
+svi_clean %>%
+  filter(!is.na(rpl_themes)) %>%
+  slice_max(rpl_themes, n = 25) %>%
+  select(
+    State          = state,
+    County         = county,
+    Population     = e_totpop,
+    `Overall SVI`  = rpl_themes,
+    `Theme 1`      = rpl_theme1,
+    `Theme 2`      = rpl_theme2,
+    `Theme 3`      = rpl_theme3,
+    `Theme 4`      = rpl_theme4
+  ) %>%
+  mutate(across(where(is.numeric) & !Population, ~ percent(., accuracy = 0.1)),
+         Population = scales::comma(Population)) %>%
+  kable(caption = "Top 25 most socially vulnerable US counties by overall SVI score (2022)") %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE, position = "left"
+  ) %>%
+  column_spec(4, bold = TRUE, color = "white",
+              background = spec_color(
+                as.numeric(gsub("%", "", svi_clean %>%
+                  filter(!is.na(rpl_themes)) %>%
+                  slice_max(rpl_themes, n = 25) %>%
+                  pull(rpl_themes))),
+                end = 0.9, option = "magma", direction = -1))
+
+```
+
+---
+
+# Literature Cited
+
+```{r literature-cited, echo=FALSE, include=FALSE}
+
+references_path <- here("Scripts", "Docs", "References")
+
+# Generate citations for all loaded packages
+knitr::write_bib(.packages(), here(references_path, "references.bib"))
+
+# Save session information
+session_info_obj <- sessioninfo::session_info()
+
+write.csv(session_info_obj$platform %>% as_tibble(),
+          here(references_path, "session_info.csv"))
+write.csv(session_info_obj$packages %>% as_tibble(),
+          here(references_path, "session_info_packages.csv"))
+
+```

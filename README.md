@@ -31,6 +31,9 @@ template-repository/
 ```
 
 - **Scripts/**: Contains R scripts for data analysis and visualization.
+  - `01-template-rmarkdown-pdf.Rmd` — PDF report template
+  - `02-rmarkdown-template-html.Rmd` — HTML report template
+  - `03-cdc-svi-analysis.Rmd` — **USEPA CDC Social Vulnerability Index (SVI) Analysis**: downloads the 2022 CDC/ATSDR county-level SVI dataset, cleans and recodes missing values, produces summary statistics, distribution plots, state-level rankings, choropleth maps for the overall SVI and each of the four SVI themes, a pairwise correlation matrix, and a table of the most vulnerable counties.
 - **Docs/**: Contains documentation files, including LaTeX templates and references.
 - **Output/**: Contains output files, figures, and tables generated from the analysis.
 - **html.css**: CSS file for HTML output.
